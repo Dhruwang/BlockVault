@@ -1,38 +1,132 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #27282F;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* landing page css starts  */
+.lpOuter{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.lpInnerUpper{
+  height: 8vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+  font-size: 1rem;
+  color: #C4C4C4;
 }
 
-.App-link {
-  color: #61dafb;
+.lpInnerUpperLeft{
+  font-size: 2rem;
+  background: linear-gradient(90deg, rgba(203,142,233,1) 0%, rgba(77,60,87,1) 100%);
+  background-clip: text;
+  color: transparent;
+  font-weight: 500;
+  
+}
+.lpInnerUpperMiddle{
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lpInnerUpperMiddle ul{
+  width: 100%;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+}
+.lpInnerUpperRight button{
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+  background-color: transparent;
+  border: 2px solid #484B4E;
+  color: #C4C4C4;
+}
+.lpInnerBody{
+  width: 95vw;
+  height: 75vh;
+  justify-content: space-between;
+}
+.lpInnerBodyLeft{
+  height: 100%;
+  width: 29%;
+  background-image: url(./photos/landingPage/document.jpg);
+  background-size: cover;
+  border-radius: 2rem;
+}
+.lpInnerBodyRight{
+  height: 100%;
+  width: 70%;
+  background-color: #1D1C1C;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.multipleColorPalette{
+  width: 50%;
+  height: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.multipleColorPalette > div{
+  height: 100%;
+  width: 20%;
+  border-radius: 1.5rem;
+}
+.multipleColorPalette :nth-child(1){
+  background-color: #CB8EE9;
+}
+.multipleColorPalette :nth-child(2){
+  background-color: #A576BB;
+}
+.multipleColorPalette :nth-child(3){
+  background-color: #7C5D8D;
+}
+.multipleColorPalette :nth-child(4){
+  background-color: #4C3C57;
+}
+.punchLine{
+  width: 50%;
+}
+.punchLine h2{
+  font-size: 4rem;
+  color: #C4C4C4;
+}
+.lpDescription{
+  width: 50%;
+}
+.lpDescription p{
+  color: #5F5F5E;
+  font-size: 1.5rem;
+}
+.lpInnerFooter{
+  width: 95%;
+  height: 10vh;
+}
+.lpInnerFooter button{
+  width: 100%;
+  height: 100%;
+  background-color: #DF9CFF;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  border: 4px solid #DF9CFF;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* landing page css ends */

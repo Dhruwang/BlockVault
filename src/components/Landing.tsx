@@ -3,13 +3,14 @@ import Web3 from 'web3';
 import { useSelector,useDispatch } from 'react-redux'
 import { RootState } from '../store'
 import { lpActions } from '../store/landingPage';
+import { useNavigate } from 'react-router-dom';
 
 export default function Landing() {
 
-const walletConnected = useSelector((state:RootState)=>state.lp.walletConnected)
 const [web3, setWeb3] = useState<Web3 | undefined>(undefined);
-const [walletAddress, setWalletAddress] = useState<string|undefined>(undefined)
 const dispatch = useDispatch();
+const walletAddress = useSelector((state:RootState)=>state.lp.walletAddress)
+const navigate = useNavigate();
 
 const connectToMetaMask = async () => {
     if (typeof window.ethereum !== 'undefined') {
@@ -33,16 +34,24 @@ const connectToMetaMask = async () => {
     }
   };
 
+  const NavigateToHome=()=>{
+    if(!walletAddress){
+        return;
+    }
+    navigate("/home")
+
+  }
+
   useEffect(() => {
     connectToMetaMask();
   }, [])
 
   useEffect(() => {
-    dispatch(lpActions.connectWallet())
+    
     const getWalletAddress = async () => {
         if (web3) {
           const accounts = await web3.eth.getAccounts();
-          setWalletAddress(accounts[0]);
+          dispatch(lpActions.connectWallet(accounts[0]));
         }
       };
       getWalletAddress();
@@ -52,7 +61,6 @@ const connectToMetaMask = async () => {
 
   return (
     <div>
-        {console.log(walletConnected)!}
         <div className='lpOuter'>
             <div className='lpInnerUpper d-flex justify-content-between'>
                 <div className='lpInnerUpperLeft'>
@@ -90,9 +98,10 @@ const connectToMetaMask = async () => {
                 </div>
             </div>
             <div className='lpInnerFooter'>
-                <button>
-                    <span className='mx-4'><i className="bi bi-wallet text-light"></i></span>
-                    Connect your wallet to continue
+                <button onClick={NavigateToHome}>
+                    {walletAddress?<div>Click here to continue</div>:<div><span className='mx-4'><i className="bi bi-wallet text-light"></i></span>
+                    Connect your wallet to continue</div>}
+                    
                 </button>
             </div>
         </div>

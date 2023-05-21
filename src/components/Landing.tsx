@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Landing() {
+
   return (
     <div>
         <div className='lpOuter'>
@@ -41,6 +42,7 @@ export default function Landing() {
             </div>
             <div className='lpInnerFooter'>
                 <button>
+                    <span className='mx-4'><i className="bi bi-wallet text-light"></i></span>
                     Connect your wallet to continue
                 </button>
             </div>

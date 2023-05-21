@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 body{
   background-color: #27282F;
 }
@@ -47,6 +48,7 @@ body{
   padding: 0;
   margin: 0;
   font-size: 1.5rem;
+  text-transform: uppercase;
 }
 .lpInnerUpperRight button{
   border-radius: 1rem;
@@ -127,6 +129,11 @@ body{
   border-radius: 2rem;
   font-size: 1.5rem;
   border: 4px solid #DF9CFF;
+}
+.lpInnerFooter button span{
+  background-color: black;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 /* landing page css ends */

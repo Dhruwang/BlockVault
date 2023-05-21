@@ -1,9 +1,58 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import Web3 from 'web3';
+import { useSelector,useDispatch } from 'react-redux'
+import { RootState } from '../store'
+import { lpActions } from '../store/landingPage';
 
 export default function Landing() {
 
+const walletConnected = useSelector((state:RootState)=>state.lp.walletConnected)
+const [web3, setWeb3] = useState<Web3 | undefined>(undefined);
+const [walletAddress, setWalletAddress] = useState<string|undefined>(undefined)
+const dispatch = useDispatch();
+
+const connectToMetaMask = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        // Request account access if needed
+        await window.ethereum.enable();
+
+        // Create a new Web3 instance
+        const web3Instance = new Web3(window.ethereum);
+
+        // Set the Web3 instance to the component state
+        setWeb3(web3Instance);
+
+      } catch (error) {
+        // Handle error if user rejects or if MetaMask is not installed
+        console.error(error);
+      }
+    } else {
+      // Display a message to install MetaMask if it's not detected
+      console.log('Please install MetaMask');
+    }
+  };
+
+  useEffect(() => {
+    connectToMetaMask();
+  }, [])
+
+  useEffect(() => {
+    dispatch(lpActions.connectWallet())
+    const getWalletAddress = async () => {
+        if (web3) {
+          const accounts = await web3.eth.getAccounts();
+          setWalletAddress(accounts[0]);
+        }
+      };
+      getWalletAddress();
+  }, [web3])
+  
+  
+
   return (
     <div>
+        {console.log(walletConnected)!}
         <div className='lpOuter'>
             <div className='lpInnerUpper d-flex justify-content-between'>
                 <div className='lpInnerUpperLeft'>
@@ -17,8 +66,8 @@ export default function Landing() {
                     </ul>
                 </div>
                 <div className='lpInnerUpperRight'>
-                    <button>
-                        Connect wallet
+                    <button onClick={connectToMetaMask}>
+                        {walletAddress?walletAddress.slice(0,5)+"..."+walletAddress.slice(walletAddress.length-3,walletAddress.length): "Connect wallet"}
                     </button>
                 </div>
             </div>

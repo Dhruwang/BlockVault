@@ -4,7 +4,7 @@ const lpSlice = createSlice({
     name:"walletConnect",
     initialState:{walletConnected:false},
     reducers:{
-            connectWallet: (state, action) => {
+            connectWallet: (state) => {
                 state.walletConnected = true;
             }
         }

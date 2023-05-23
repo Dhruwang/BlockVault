@@ -4,6 +4,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { RootState } from '../store'
 import { lpActions } from '../store/landingPage';
 import { useNavigate } from 'react-router-dom';
+import Entrymodal from './Entrymodal';
 
 export default function Landing() {
 
@@ -41,6 +42,9 @@ const connectToMetaMask = async () => {
     navigate("/home")
 
   }
+  const showEntryModal=()=>{
+    document.getElementById("EmOuter")!.style.display = "flex"
+}
 
   useEffect(() => {
     connectToMetaMask();
@@ -98,7 +102,7 @@ const connectToMetaMask = async () => {
                 </div>
             </div>
             <div className='lpInnerFooter'>
-                <button onClick={NavigateToHome}>
+                <button onClick={showEntryModal}>
                     {walletAddress?<div>Click here to continue</div>:<div><span className='mx-4'><i className="bi bi-wallet text-light"></i></span>
                     Connect your wallet to continue</div>}
                     

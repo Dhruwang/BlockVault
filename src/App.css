@@ -128,7 +128,6 @@ body{
   border: none;
   border-radius: 2rem;
   font-size: 1.5rem;
-  border: 4px solid #DF9CFF;
 }
 .lpInnerFooter button span{
   background-color: black;
@@ -137,3 +136,81 @@ body{
 }
 
 /* landing page css ends */
+
+/* Entrymodal css starts  */
+.EmOuter{
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  backdrop-filter: blur(5px);
+}
+.EntryModal{
+  width: 60rem;
+  border: 2px solid #DF9CFF;
+  background-color: #1D1C1C;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.EntryModalUpper{
+  height: 0vh;
+  width: 100%;
+  background-color: #DF9CFF;
+}
+.EntryModalMiddle{
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem ;
+}
+.inputDiv{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.inputDiv > label{
+  color: #C4C4C4;
+  font-size: 2rem;
+}
+.inputDiv input{
+  background: none;
+  border: 2px solid #DF9CFF;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: #C4C4C4;
+  font-size: 1.5rem;
+}
+.inputDiv input:focus{
+  outline: none;
+}
+.EntryModalLower{
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+.EntryModalLower button{
+  margin-left:1rem;
+}
+
+.modalBtn{
+  padding: 1rem 2rem;
+  background-color: #DF9CFF;
+  color: black;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.modalBtn-inverted{
+  padding: 1rem 2rem;
+  background-color: transparent;
+  color: #DF9CFF;
+  border: 2px solid #DF9CFF;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+/* Entrymodal css ends */

@@ -12,8 +12,9 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
     },
-    profileIsCompleted: {
+    isProfileCompleted: {
         type: Boolean,
+        default: false
     }
 });
 const User = mongoose.model("User", userSchema);

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = exports.loginUser = void 0;
+exports.checkIsProfileCompleted = exports.createUser = exports.loginUser = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const userSchema_1 = require("../models/userSchema");
@@ -38,7 +38,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!address) {
             res.send("Address is required").status(400);
         }
-        const user = new userSchema_1.User({ address, username, pin });
+        const user = new userSchema_1.User({ address, username, pin, isProfileCompleted: true });
         try {
             yield user.save();
             res.status(201).send(user);
@@ -53,3 +53,22 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.createUser = createUser;
+const checkIsProfileCompleted = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const address = req.query.address;
+        if (!address) {
+            res.send("Address is required").status(400);
+            return;
+        }
+        const user = yield userSchema_1.User.findOne({ address });
+        if (!user) {
+            res.send("User not found").status(404);
+            return;
+        }
+        res.send(user.isProfileCompleted).status(200);
+    }
+    catch (error) {
+        res.send("Internal server error").status(500);
+    }
+});
+exports.checkIsProfileCompleted = checkIsProfileCompleted;

@@ -9,26 +9,32 @@ var jwt = require('jsonwebtoken');
 const privateKey = process.env.PRIVATE_KEY;
 
 // function to generate auth token using user's wallet address 
-const loginUser = (req:Request, res:Response) => {
+const loginUser = (req: Request, res: Response) => {
     try {
-        var token = jwt.sign(req.body,privateKey);
+        var token = jwt.sign(req.body, privateKey);
         res.send(token).status(200);
     } catch (error) {
         res.send("Internal server error").status(500)
     }
 }
 
-const createUser = async(req:Request, res:Response)=>{
-    try{
+const createUser = async (req: Request, res: Response) => {
+    try {
         const address = req.body.address;
         const username = req.body.username;
         const pin = req.body.pin;
 
-        if(!address){
+        if (!address) {
             res.send("Address is required").status(400);
         }
 
-        const user = new User({address, username, pin})
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            res.send("Username is already taken").status(409);
+            return;
+        }
+
+        const user = new User({ address, username, pin, isProfileCompleted: true })
 
         try {
             await user.save();
@@ -41,8 +47,27 @@ const createUser = async(req:Request, res:Response)=>{
     }
     catch (error) {
         console.log(error)
-            res.send("Internal server error").status(500)
-        }
+        res.send("Internal server error").status(500)
+    }
 }
 
-export {loginUser,createUser}
+const checkIsProfileCompleted = async (req: Request, res: Response) => {
+    try {
+        const address = req.query.address
+        if (!address) {
+            res.send("Address is required").status(400);
+            return
+        }
+        const user = await User.findOne({ address });
+        if (!user) {
+            res.send("User not found").status(404);
+            return
+        }
+        res.send(user.isProfileCompleted).status(200);
+    }
+    catch (error) {
+        res.send("Internal server error").status(500)
+    }
+}
+
+export { loginUser, createUser, checkIsProfileCompleted }

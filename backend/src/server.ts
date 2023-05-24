@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import mongoose,{ ConnectOptions }from 'mongoose';
 import { authRouter } from './routes/authRouter';
+var cors = require('cors')
 
 const username = process.env.MONGO_USERNAME;
 const password = process.env.MONGO_PASSWORD;
@@ -24,6 +25,7 @@ const app = express();
 const port = 8000;
 
 // Middleware
+app.use(cors())
 app.use(express.json());
 app.use("/auth",authRouter)
 

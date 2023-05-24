@@ -37,18 +37,32 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const pin = req.body.pin;
         if (!address) {
             res.send("Address is required").status(400);
+            return;
         }
-        const user = new userSchema_1.User({ address, username, pin, isProfileCompleted: true });
-        try {
-            yield user.save();
-            res.status(201).send(user);
+        const existingAddress = yield userSchema_1.User.findOne({ address });
+        if (!existingAddress) {
+            const newUser = new userSchema_1.User({ address });
+            try {
+                yield newUser.save();
+                res.status(201).send(newUser);
+                return;
+            }
+            catch (error) {
+                res.status(500).send(error);
+            }
         }
-        catch (error) {
-            res.status(500).send(error);
+        else {
+            const user = yield userSchema_1.User.findOneAndUpdate({ address }, { address, username, pin, isProfileCompleted: true });
+            try {
+                yield user.save();
+                res.status(201);
+            }
+            catch (error) {
+                res.status(500).send(error);
+            }
         }
     }
     catch (error) {
-        console.log(error);
         res.send("Internal server error").status(500);
     }
 });
@@ -62,7 +76,7 @@ const checkIsProfileCompleted = (req, res) => __awaiter(void 0, void 0, void 0, 
         }
         const user = yield userSchema_1.User.findOne({ address });
         if (!user) {
-            res.send("User not found").status(404);
+            res.json({ "error": "User not found" }).status(404);
             return;
         }
         res.send(user.isProfileCompleted).status(200);

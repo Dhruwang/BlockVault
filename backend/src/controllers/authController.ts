@@ -26,27 +26,34 @@ const createUser = async (req: Request, res: Response) => {
 
         if (!address) {
             res.send("Address is required").status(400);
+            return
         }
 
-        const existingUser = await User.findOne({ username });
-        if (existingUser) {
-            res.send("Username is already taken").status(409);
-            return;
+        const existingAddress = await User.findOne({ address });
+
+        if (!existingAddress) {
+            const newUser = new User({ address })
+            try {
+                await newUser.save();
+                res.status(201).send(newUser);
+                return
+            } catch (error) {
+                res.status(500).send(error);
+            }
         }
+        else {
+            const user = await User.findOneAndUpdate({address},{ address, username, pin, isProfileCompleted: true })
+            try {
+                await user.save();
+                res.status(201);
+            } catch (error) {
+                res.status(500).send(error);
+            }
 
-        const user = new User({ address, username, pin, isProfileCompleted: true })
-
-        try {
-            await user.save();
-            res.status(201).send(user);
-        } catch (error) {
-            res.status(500).send(error);
         }
-
 
     }
     catch (error) {
-        console.log(error)
         res.send("Internal server error").status(500)
     }
 }
@@ -60,7 +67,7 @@ const checkIsProfileCompleted = async (req: Request, res: Response) => {
         }
         const user = await User.findOne({ address });
         if (!user) {
-            res.send("User not found").status(404);
+            res.json({"error":"User not found"}).status(404);
             return
         }
         res.send(user.isProfileCompleted).status(200);

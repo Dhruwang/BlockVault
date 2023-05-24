@@ -273,3 +273,62 @@ body{
 }
 
 /* Spinner css ends */
+
+/* Navigaton page css starts  */
+.NavigationOuter{
+  height: 100vh;
+  width: 20vw;
+  background-color: #1D1C1C;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 2rem;
+  justify-content: space-between;
+}
+.NavigationUpper h1{
+  background: linear-gradient(90deg, rgba(203,142,233,1) 0%, rgba(77,60,87,1) 100%);
+  background-clip: text;
+  color: transparent;
+  font-weight: 500;
+}
+.NavigationUpper button{
+  margin: 2rem 0 ;
+}
+.NavLinks ul{
+  padding: 0;
+}
+.NavLinks ul li{
+  color: #C4C4C4;
+  list-style: none;
+  font-size: 2rem;
+  margin: 2rem 0;
+  cursor: pointer;
+}
+.NavigationLower{
+  padding: 2rem;
+  width: 100%;
+  border-radius: 2rem;
+  background-color: #DF9CFF;
+}
+.userdetails{
+  margin-bottom: 2rem;
+}
+.userdetails p{
+  font-size: 1.5rem;
+  margin: 0;
+
+}
+
+.avatar{
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background-color: #1D1C1C;
+  padding: 1rem;
+  color: #C4C4C4;
+}
+.NavigationLower button{
+  border: 2px solid black;
+  color: black;
+}
+/* Navigation page css ends  */

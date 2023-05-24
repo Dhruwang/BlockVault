@@ -12,7 +12,7 @@ const privateKey = process.env.PRIVATE_KEY;
 const loginUser = (req: Request, res: Response) => {
     try {
         var token = jwt.sign(req.body, privateKey);
-        res.send(token).status(200);
+        res.json({"token":token}).status(200);
     } catch (error) {
         res.send("Internal server error").status(500)
     }

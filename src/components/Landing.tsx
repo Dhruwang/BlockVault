@@ -38,7 +38,9 @@ export default function Landing() {
   };
 
   const handleLandingPageSubmit = async () => {
-
+    if (!walletAddress) {
+      return;
+    }
 
     setShowSpinner(true);
     try {
@@ -64,14 +66,32 @@ export default function Landing() {
         setShowSpinner(false)
       }
       else {
-        navigate('/dashboard')
-        setShowSpinner(false)
+        console.log("running")
+        handleLogin()
+        
       }
     } catch (error) {
       console.log(error)
     }
 
 
+  }
+
+  const handleLogin = async()=>{
+    const res = await fetch(`http://localhost:8000/auth/loginUser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        address: walletAddress
+      })
+    })
+    const resJSON = await res.json();
+    const token = resJSON.token;
+    sessionStorage.setItem("token",token)
+    navigate("/home")
+    setShowSpinner(false)
   }
 
   const NavigateToHome = () => {

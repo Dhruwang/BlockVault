@@ -330,5 +330,6 @@ body{
 .NavigationLower button{
   border: 2px solid black;
   color: black;
+  width: 100%;
 }
 /* Navigation page css ends  */

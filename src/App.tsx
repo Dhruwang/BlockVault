@@ -1,4 +1,5 @@
 import './App.css';
+import AppMain from './components/AppMain';
 import Entrymodal from './components/Entrymodal';
 import Landing from './components/Landing';
 import Navigation from './components/Navigation';
@@ -11,7 +12,7 @@ function App() {
       <Entrymodal />
       <Routes>
         <Route path='/' element={<Landing />} />
-        <Route path='/home' element={<Navigation />} />
+        <Route path='/home' element={<AppMain />} />
       </Routes>
     </BrowserRouter>
   );

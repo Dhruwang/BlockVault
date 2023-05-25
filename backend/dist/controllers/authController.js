@@ -20,15 +20,21 @@ dotenv_1.default.config({ path: path_1.default.join(__dirname, '../../.env') });
 var jwt = require('jsonwebtoken');
 const privateKey = process.env.PRIVATE_KEY;
 // function to generate auth token using user's wallet address 
-const loginUser = (req, res) => {
+const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const user = yield userSchema_1.User.findOne(req.body);
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
         var token = jwt.sign(req.body, privateKey);
-        res.json({ "token": token }).status(200);
+        res.json({ "token": token, "username": user.username }).status(200);
     }
     catch (error) {
         res.send("Internal server error").status(500);
     }
-};
+});
 exports.loginUser = loginUser;
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -86,3 +92,11 @@ const checkIsProfileCompleted = (req, res) => __awaiter(void 0, void 0, void 0, 
     }
 });
 exports.checkIsProfileCompleted = checkIsProfileCompleted;
+const fetchUsername = (req, res) => {
+    const address = req.query.address;
+    try {
+        const user = req;
+    }
+    catch (error) {
+    }
+};

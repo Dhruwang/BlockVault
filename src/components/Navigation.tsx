@@ -1,13 +1,21 @@
-import React from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store'
+import { useEffect, useState } from 'react'
 
 export default function Navigation() {
+
+    const [username, setusername] = useState<string|null>(null)
+    useEffect(() => {
+      setusername(sessionStorage.getItem('username'))
+    }, [])
+    
     return (
         <div>
             <div className='NavigationOuter'>
                 <div>
                     <div className='NavigationUpper'>
                         <h1>BLOCKVAULT</h1>
-                        <button className='modalBtn'><i className="bi bi-upload"></i> &nbsp;  Upload </button>
+                       
                     </div>
                     <div className='NavigationMiddle'>
                         <div className='NavLinks'>
@@ -22,10 +30,10 @@ export default function Navigation() {
                 <div className='NavigationLower'>
                     <div className='userdetails'>
                         <p>Hello,</p>
-                        <h3>Username</h3>
+                        <h3>{username?username:"username NA"}</h3>
                     </div>
                     <div>
-                        <button className='modalBtn-inverted'>Logout</button>
+                        <button className='modalBtn-inverted'><i className="bi bi-box-arrow-right"></i> Logout</button>
                     </div>
 
                 </div>

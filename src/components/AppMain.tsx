@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import Navigation from './Navigation'
+import Home from './Home'
 
 export default function AppMain() {
 
@@ -11,6 +12,10 @@ export default function AppMain() {
   
 
   return (
-    <div><Navigation/></div>
+    <div className='appMainOuter'>
+      <Navigation/>
+      <Home />
+      
+    </div>
   )
 }

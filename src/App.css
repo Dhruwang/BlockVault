@@ -319,17 +319,92 @@ body{
 
 }
 
-.avatar{
-  height: 3rem;
-  width: 3rem;
-  border-radius: 50%;
-  background-color: #1D1C1C;
-  padding: 1rem;
-  color: #C4C4C4;
-}
 .NavigationLower button{
   border: 2px solid black;
   color: black;
   width: 100%;
 }
 /* Navigation page css ends  */
+
+/* appmain css starts  */
+.appMainOuter{
+  display: flex;
+}
+/* appmain css ends */
+
+/* home page css starts  */
+.homeOuter{
+  padding: 2rem;
+  min-height: 100vh;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.homeUpper{
+  width: 100%;
+  height: 30vh;
+  background-color: #1D1C1C;
+  border-radius: 2rem;
+}
+.homeLower{
+  padding: 2rem;
+  width: 100%;
+}
+.homeLowerHead{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #C4C4C4;
+}
+.homeLowerHead h2{
+  
+  font-size: 2.5rem;
+}
+.homeLowerBody{
+  width: 100%;
+  padding-top: 2rem;
+}
+/* home page css ends  */
+
+/* document box css starts  */
+.documentBoxOuter{
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #C4C4C4;
+}
+.documentBoxOuter:hover{
+  background-color: #1D1C1C;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.documentBoxLeft{
+  display: flex;
+  align-items: center;
+}
+.docIcon{
+  border: 2px solid #C4C4C4;
+  padding: 0.8rem;
+  border-radius: 20%;
+}
+.docName{
+  margin: 0 2rem;
+  font-size: 2rem;
+}
+.documentBoxRight{
+  display: flex;
+  font-size: 1.5rem;
+}
+.docSize{
+  margin: 0 2rem;
+}
+.docOptionIcon button{
+  background-color: transparent;
+  border: none;
+  color: #C4C4C4;
+}
+/* document box css ends */

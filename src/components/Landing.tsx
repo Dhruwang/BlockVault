@@ -89,7 +89,13 @@ export default function Landing() {
     })
     const resJSON = await res.json();
     const token = resJSON.token;
-    sessionStorage.setItem("token",token)
+    const username = resJSON.username;
+
+    // setting value of username 
+
+
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("username", username);
     navigate("/home")
     setShowSpinner(false)
   }

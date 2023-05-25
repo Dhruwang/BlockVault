@@ -9,10 +9,19 @@ var jwt = require('jsonwebtoken');
 const privateKey = process.env.PRIVATE_KEY;
 
 // function to generate auth token using user's wallet address 
-const loginUser = (req: Request, res: Response) => {
+const loginUser = async(req: Request, res: Response) => {
     try {
+
+        const user = await User.findOne(req.body)
+
+        if(!user){
+            return res.status(404).json({
+                message: "User not found"
+        })
+        }
+
         var token = jwt.sign(req.body, privateKey);
-        res.json({"token":token}).status(200);
+        res.json({"token":token,"username":user.username}).status(200);
     } catch (error) {
         res.send("Internal server error").status(500)
     }
@@ -76,5 +85,15 @@ const checkIsProfileCompleted = async (req: Request, res: Response) => {
         res.send("Internal server error").status(500)
     }
 }
+
+const fetchUsername = (req: Request, res: Response) => {
+    const address = req.query.address
+    try {
+        const user = req
+    } catch (error) {
+        
+    }
+}
+
 
 export { loginUser, createUser, checkIsProfileCompleted }

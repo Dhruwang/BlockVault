@@ -1,87 +1,92 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import DocumentBox from './DocumentBox'
+import { Web3Storage, getFilesFromPath } from 'web3.storage';
 
 export default function Home() {
 
-  const [selectedFile, setselectedFile] = useState<any>(null)
+  const [selectedFile, setselectedFile] = useState<String|null>(null)
   const fileInput = document.getElementById('fileUpload')
-  
-  fileInput && fileInput.addEventListener("change", (event) => {
-    const file = (event.target as HTMLInputElement).files;
-    if(file){
-      setselectedFile(file[0])
-    }
-  });
+  const token = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
 
-  const uploadFile = async()=>{
-    if(!selectedFile){
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    uploadFile2()
+
+  };
+
+  const uploadFile = async (formData:any) => {
+    if (!formData) {
       return
     }
+    console.log(formData)
     try {
-      const response = await fetch("/api/documents", {
-        method: "POST",
-        body: selectedFile,
-      });
+      fetch('http://localhost:8000/doc/uploadDocument', {
+      method: 'POST',
+      body: formData,
+      // 👇 Set headers manually for single file upload
       
-      if (response.status === 200) {
-        console.log("document uploaded successfully");
-      } else {
-        console.log("error");
-      }
+    })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err));
     } catch (error) {
       console.log(error);
     }
-    
+
+  }
+  const uploadFile2=async()=>{
+    if(!token){
+      return
+    }
+    const storage = new Web3Storage({ token });
+    const fileInput = document.getElementById("fileUpload") as HTMLInputElement;
+        const cid = await storage.put(fileInput.files!);
+        
+        console.log(`https://${cid}.ipfs.dweb.link/`);
   }
 
-  useEffect(() => {
-    uploadFile()
-  }, [selectedFile])
-  
- 
 
   const docExampleArray = [
     {
-      "docId":"dfafaf",
-      "docType" : "pdf",
-      "docName":"Resume",
-      "docTimestamp":"dsfsfsdf",
-      "docSize":"1 mb" 
-  },{
-      "docId":"dfafaf",
-      "docType" : "pdf",
-      "docName":"Marksheet",
-      "docTimestamp":"dsfsfsdf",
-      "docSize":"1.5 mb"    
+      "docId": "dfafaf",
+      "docType": "pdf",
+      "docName": "Resume",
+      "docTimestamp": "dsfsfsdf",
+      "docSize": "1 mb"
+    }, {
+      "docId": "dfafaf",
+      "docType": "pdf",
+      "docName": "Marksheet",
+      "docTimestamp": "dsfsfsdf",
+      "docSize": "1.5 mb"
+
+    }
+  ]
+
+  const handleFileUpload = () => {
+    console.log("running")
+    document.getElementById('fileUpload')!.click()
 
   }
-]
-
-const handleFileUpload=()=>{
-  fileInput?.click()
-}
-
-
-
   return (
     <div>
-        <div className="homeOuter">
-          <div className='homeUpper'>
+      <div className="homeOuter">
+        <div className='homeUpper'>
+      {console.log(token)!}
 
+        </div>
+        <button className='modalBtn my-4' onClick={handleFileUpload}><i className="bi bi-upload"></i> &nbsp; <input type='file' name='file' id='fileUpload' onChange={handleFileChange}  style={{ display: "none" }} multiple={false} accept=".txt,.pdf,.doc,.ppt"></input>{selectedFile?selectedFile:"Upload"}</button>
+        <div className='homeLower'>
+          <div className='homeLowerHead'>
+            <h2>My Documents</h2>
+            <div><i className="bi bi-search fs-2"></i></div>
           </div>
-         <button className='modalBtn' onClick={handleFileUpload}><i className="bi bi-upload"></i> &nbsp; <input type='file' id='fileUpload' style={{display:"none"}} multiple={false} accept=".txt,.pdf,.doc,.ppt"></input>Upload</button>
-          <div className='homeLower'>
-            <div className='homeLowerHead'>
-              <h2>My Documents</h2>
-              <div><i className="bi bi-search fs-2"></i></div>
-            </div>
-            <div className='homeLowerBody'>
-              {docExampleArray.map((element)=>{
-                  return <DocumentBox docId={element.docId} docName={element.docName} docSize={element.docSize} docTimestamp={element.docTimestamp} docType={element.docType}></DocumentBox>
-              })}
-            </div>
+          <div className='homeLowerBody'>
+            {docExampleArray.map((element) => {
+              return <DocumentBox docId={element.docId} docName={element.docName} docSize={element.docSize} docTimestamp={element.docTimestamp} docType={element.docType}></DocumentBox>
+            })}
           </div>
         </div>
+      </div>
     </div>
   )
 }

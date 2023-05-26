@@ -1,0 +1,6 @@
+
+    Decentralization: IPFS is a decentralized network, which means that there is no single point of failure. If one node goes down, the data will still be available on other nodes.
+    Reliability: IPFS is a reliable network, and data is stored on multiple nodes. This makes it less likely that data will be lost.
+    Security: IPFS is a secure network, and data is encrypted. This makes it more difficult for unauthorized users to access the data.
+    Scalability: IPFS is a scalable network, and can handle a large volume of data.
+

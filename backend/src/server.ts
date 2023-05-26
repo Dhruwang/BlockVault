@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
 import mongoose,{ ConnectOptions }from 'mongoose';
 import { authRouter } from './routes/authRouter';
+import { docsRouter } from './routes/docsRouter';
+const multer = require('multer');
 var cors = require('cors')
 
 const username = process.env.MONGO_USERNAME;
@@ -28,6 +30,7 @@ const port = 8000;
 app.use(cors())
 app.use(express.json());
 app.use("/auth",authRouter)
+app.use("/doc",docsRouter)
 
 // Routes
 app.get('/', (req: Request, res: Response) => {

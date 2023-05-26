@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const authRouter_1 = require("./routes/authRouter");
+const docsRouter_1 = require("./routes/docsRouter");
+const multer = require('multer');
 var cors = require('cors');
 const username = process.env.MONGO_USERNAME;
 const password = process.env.MONGO_PASSWORD;
@@ -25,6 +27,7 @@ const port = 8000;
 app.use(cors());
 app.use(express_1.default.json());
 app.use("/auth", authRouter_1.authRouter);
+app.use("/doc", docsRouter_1.docsRouter);
 // Routes
 app.get('/', (req, res) => {
     res.send('Hello, world!');

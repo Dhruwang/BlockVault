@@ -11,7 +11,6 @@ function App() {
   return (
     <BrowserRouter>
       <Entrymodal />
-      <ConfirmModal />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/home' element={<AppMain />} />

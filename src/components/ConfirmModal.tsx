@@ -2,17 +2,14 @@ import React from 'react'
 
 export default function ConfirmModal({
     message,
-    onConfirm
+    onConfirm,
+    onCancel
 }:{
     message?: string,
-    onConfirm?: () => void
+    onConfirm?: () => void,
+    onCancel?: () => void
 }) {
 
-    const dismissModal=()=>{
-        if(document.getElementById("confirmModalOuter")){
-            document.getElementById("confirmModalOuter")!.style.display = "none"
-        }
-}
   return (
     <div className='confirmModalOuter' id='confirmModalOuter'>
         <div className='confirmModalInner'>
@@ -20,7 +17,7 @@ export default function ConfirmModal({
                 <p>{message}</p>
             </div>
             <div className='confirmModalButtons'>
-                <button className='modalBtn-inverted' onClick={dismissModal}>Cancel</button>
+                <button className='modalBtn-inverted' onClick={onCancel}>Cancel</button>
                 <button className='modalBtn' onClick={onConfirm}>Confirm</button>
             </div>
         </div>

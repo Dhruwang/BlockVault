@@ -378,6 +378,16 @@ body{
   width: 100%;
   padding-top: 2rem;
 }
+.uploadingLoaderDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.uploadingLoaderDiv p{
+  font-size: 1.5rem;
+  color: #C4C4C4;
+}
 /* home page css ends  */
 
 /* document box css starts  */
@@ -426,7 +436,7 @@ body{
   height: 100vh;
   width: 100vw;
   backdrop-filter: blur(5px);
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;

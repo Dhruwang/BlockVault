@@ -100,31 +100,27 @@ export default function Landing() {
     setShowSpinner(false)
   }
 
-  const NavigateToHome = () => {
-    if (!walletAddress) {
-      return;
-    }
-    navigate("/home")
-
-  }
   const showEntryModal = () => {
     document.getElementById("EmOuter")!.style.display = "flex"
   }
 
-  useEffect(() => {
-    connectToMetaMask();
-  }, [])
+
+  const getWalletAddress = async () => {
+    if (web3) {
+      const accounts = await web3.eth.getAccounts();
+      dispatch(lpActions.connectWallet(accounts[0]));
+    }
+  };
 
   useEffect(() => {
 
-    const getWalletAddress = async () => {
-      if (web3) {
-        const accounts = await web3.eth.getAccounts();
-        dispatch(lpActions.connectWallet(accounts[0]));
-      }
-    };
-    getWalletAddress();
+      getWalletAddress();
+    
   }, [web3])
+
+  window.ethereum.on('accountsChanged', function () {
+    getWalletAddress();
+  })
 
 
 

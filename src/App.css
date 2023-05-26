@@ -282,14 +282,17 @@ body{
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding: 2rem;
   justify-content: space-between;
+}
+.NavigationMain{
+  width: 100%;
 }
 .NavigationUpper h1{
   background: linear-gradient(90deg, rgba(203,142,233,1) 0%, rgba(77,60,87,1) 100%);
   background-clip: text;
   color: transparent;
   font-weight: 500;
+  margin: 2rem;
 }
 .NavigationUpper button{
   margin: 2rem 0 ;
@@ -300,9 +303,9 @@ body{
 .NavLinks ul li{
   color: #C4C4C4;
   list-style: none;
-  font-size: 2rem;
-  margin: 2rem 0;
+  font-size: 1.5rem;
   cursor: pointer;
+  padding: 2rem;
 }
 .NavigationLower{
   padding: 2rem;
@@ -324,6 +327,12 @@ body{
   color: black;
   width: 100%;
 }
+.selectedTab{
+  background-color: #DF9CFF;
+  border-left: 8px solid #7C5D8D;
+  color: #4C3C57 !important;
+}
+
 /* Navigation page css ends  */
 
 /* appmain css starts  */
@@ -346,6 +355,9 @@ body{
   height: 30vh;
   background-color: #1D1C1C;
   border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .homeLower{
   padding: 2rem;
@@ -408,3 +420,35 @@ body{
   color: #C4C4C4;
 }
 /* document box css ends */
+
+/* confirm modal css starts  */
+.confirmModalOuter{
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(5px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+}
+.confirmModalInner{
+  background-color: #1D1C1C;
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+}
+.confirmModalContent p{
+  font-size: 2rem;
+  color: #C4C4C4;
+}
+.confirmModalButtons{
+  margin-top: 2rem;
+}
+.confirmModalButtons button{
+  margin: 0 1rem;
+}
+/* confirm modal css ends */

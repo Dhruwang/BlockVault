@@ -71,10 +71,8 @@ export default function Home() {
     <div>
       <div className="homeOuter">
         <div className='homeUpper'>
-      {console.log(token)!}
-
+        <button className='modalBtn-inverted my-4' onClick={handleFileUpload}><i className="bi bi-upload"></i> &nbsp; <input type='file' name='file' id='fileUpload' onChange={handleFileChange}  style={{ display: "none" }} multiple={false} accept=".txt,.pdf,.doc,.ppt"></input>{selectedFile?selectedFile:"Upload"}</button>
         </div>
-        <button className='modalBtn my-4' onClick={handleFileUpload}><i className="bi bi-upload"></i> &nbsp; <input type='file' name='file' id='fileUpload' onChange={handleFileChange}  style={{ display: "none" }} multiple={false} accept=".txt,.pdf,.doc,.ppt"></input>{selectedFile?selectedFile:"Upload"}</button>
         <div className='homeLower'>
           <div className='homeLowerHead'>
             <h2>My Documents</h2>

@@ -1,5 +1,6 @@
 import './App.css';
 import AppMain from './components/AppMain';
+import ConfirmModal from './components/ConfirmModal';
 import Entrymodal from './components/Entrymodal';
 import Landing from './components/Landing';
 import Navigation from './components/Navigation';
@@ -10,6 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Entrymodal />
+      <ConfirmModal />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/home' element={<AppMain />} />

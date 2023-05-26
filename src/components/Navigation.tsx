@@ -12,7 +12,7 @@ export default function Navigation() {
     return (
         <div>
             <div className='NavigationOuter'>
-                <div>
+                <div className='NavigationMain'>
                     <div className='NavigationUpper'>
                         <h1>BLOCKVAULT</h1>
                        
@@ -20,7 +20,7 @@ export default function Navigation() {
                     <div className='NavigationMiddle'>
                         <div className='NavLinks'>
                             <ul>
-                                <li><a><i className="bi bi-house"></i> &nbsp; Home</a></li>
+                                <li className='selectedTab'><a><i className="bi bi-house"></i> &nbsp; Home</a></li>
                                 <li><a><i className="bi bi-check"></i> &nbsp;Verify</a></li>
                                 <li><a><i className="bi bi-send"></i>&nbsp;  Send</a></li>
                             </ul>

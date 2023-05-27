@@ -5,23 +5,30 @@ export default function DocumentBox({
     docType,
     docName,
     docTimestamp,
-    docSize 
+    docSize ,
+    link
 }:{
     docId: string,
     docType: string,
     docName: string,
-    docTimestamp: string,
-    docSize: any
+    docTimestamp: number,
+    docSize: number,
+    link:string
 }) {
+
+    const openDocument=()=>{
+            window.open(link,"_blank");
+    }
     return (
-        <div>
+
+        <div onClick={openDocument}>
             <div className='documentBoxOuter'>
                 <div className='documentBoxLeft'>
                     <div className='docIcon'>
                         <i className="bi bi-file-text fs-2"></i>
                     </div>
                     <div className='docName'>
-                        {docName}.{docType}
+                        {docName}
                     </div>
                 </div>
                 <div className='documentBoxRight'>
@@ -29,7 +36,7 @@ export default function DocumentBox({
                         Created on 2020-03-20
                     </div>
                     <div className='docSize'>
-                        {docSize}
+                        {docSize+ "B"}
                     </div>
                     <div className='docOptionIcon'>
                         <button>

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import DocumentBox from './DocumentBox'
 import { Web3Storage } from 'web3.storage';
 import Spinner from './Spinner';
@@ -9,6 +9,17 @@ export default function Home() {
 
   const [selectedFile, setselectedFile] = useState<String | null>(null)
   const [uploadingLoader, setuploadingLoader] = useState(false)
+
+  interface document{
+    _id: string;
+    docName: string;
+    docSize: number;
+    docTimestamp: number;
+    docType: string;
+    link:string
+  }
+
+  const [doumentArray, setdoumentArray] = useState<document[]>([])
 
   interface DocumentDetails {
     name: string;
@@ -75,12 +86,25 @@ export default function Home() {
       })
       if(response.ok){
         console.log("document details saved successfully")
+        fetchAllDocuments();
       }
     }
     catch(err){
           console.log(err)
         }
 
+  }
+  const fetchAllDocuments = async()=>{
+    try {
+      const response = await fetch(`http://localhost:8000/doc/getAllDocuments?address=${walletAddress}`)
+      if(response.ok){
+        const data = await response.json()
+        console.log(data)
+        setdoumentArray(data)
+      }
+    } catch (error) {
+      
+    }
   }
 
 
@@ -111,6 +135,11 @@ export default function Home() {
     (document.getElementById("fileUpload") as HTMLInputElement).value = ""
     setselectedFile(null)
   }
+
+  useEffect(() => {
+    fetchAllDocuments()
+  }, [])
+  
   return (
     <div>
       <div className="homeOuter">
@@ -134,8 +163,8 @@ export default function Home() {
             <div><i className="bi bi-search fs-2"></i></div>
           </div>
           <div className='homeLowerBody'>
-            {docExampleArray.map((element) => {
-              return <DocumentBox docId={element.docId} docName={element.docName} docSize={element.docSize} docTimestamp={element.docTimestamp} docType={element.docType}></DocumentBox>
+            {doumentArray && doumentArray.map((element) => {
+              return <DocumentBox docId={element._id} docName={element.docName} docSize={element.docSize} docTimestamp={element.docTimestamp} docType={element.docType} link={element.link}></DocumentBox>
             })}
           </div>
         </div>

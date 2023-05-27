@@ -8,3 +8,4 @@ const docsRouter = express.Router();
 exports.docsRouter = docsRouter;
 // POST route for file upload
 docsRouter.post('/saveDocDetails', docsController_1.saveDocDetails);
+docsRouter.get('/getAllDocuments', docsController_1.fetchAllDocuemnts);

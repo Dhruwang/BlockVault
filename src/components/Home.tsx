@@ -115,8 +115,8 @@ export default function Home() {
     <div>
       <div className="homeOuter">
         <div className='homeUpper'>
-          {console.log(walletAddress)!}
-
+          <div className='homeUpperAnimation'>
+          </div>
           {uploadingLoader ?
             <div className='uploadingLoaderDiv'>
               <Spinner />

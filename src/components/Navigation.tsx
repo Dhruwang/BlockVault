@@ -47,7 +47,7 @@ export default function Navigation() {
                                         <i className="bi bi-house"></i> &nbsp; Home
                                     </a>
                                 </li>
-                                <li><a><i className="bi bi-check"></i> &nbsp;Verify</a></li>
+                                <li><a><i className="bi bi-file-break"></i> &nbsp;Verify</a></li>
                                 <li><a><i className="bi bi-send"></i>&nbsp;  Send</a></li>
                             </ul>
                         </div>

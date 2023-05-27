@@ -113,7 +113,10 @@ export default function Landing() {
   };
 
   useEffect(() => {
+    connectToMetaMask()
+  }, [])
 
+  useEffect(() => {
       getWalletAddress();
     
   }, [web3])

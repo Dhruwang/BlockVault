@@ -20,4 +20,14 @@ const saveDocDetails = async(req:Request, res:Response)=>{
     }
 }
 
-export {saveDocDetails}
+const fetchAllDocuemnts = async (req:Request, res:Response) => {
+    try {
+        const address = req.query.address
+        const doc = await document.find({address})
+        res.send(doc).status(200)
+    } catch (error) {
+        res.send("Internal Server Error").status(500)
+    }
+}
+
+export {saveDocDetails,fetchAllDocuemnts}

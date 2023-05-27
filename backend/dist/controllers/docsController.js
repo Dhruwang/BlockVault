@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveDocDetails = void 0;
+exports.fetchAllDocuemnts = exports.saveDocDetails = void 0;
 const documentSchema_1 = require("../models/documentSchema");
 const saveDocDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -30,3 +30,14 @@ const saveDocDetails = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.saveDocDetails = saveDocDetails;
+const fetchAllDocuemnts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const address = req.query.address;
+        const doc = yield documentSchema_1.document.find({ address });
+        res.send(doc).status(200);
+    }
+    catch (error) {
+        res.send("Internal Server Error").status(500);
+    }
+});
+exports.fetchAllDocuemnts = fetchAllDocuemnts;

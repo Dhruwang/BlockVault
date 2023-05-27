@@ -1,19 +1,37 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import DocumentBox from './DocumentBox'
-import { Web3Storage, getFilesFromPath } from 'web3.storage';
+import { Web3Storage } from 'web3.storage';
 import Spinner from './Spinner';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 export default function Home() {
 
   const [selectedFile, setselectedFile] = useState<String | null>(null)
   const [uploadingLoader, setuploadingLoader] = useState(false)
-  const fileInput = document.getElementById('fileUpload') as HTMLInputElement
+
+  interface DocumentDetails {
+    name: string;
+    size: number;
+    type: string;
+  }
+
+  const [documentdetails, setdocumentdetails] = useState<DocumentDetails>({
+    name:"",
+    size:0,
+    type:""
+  })
+  const walletAddress = useSelector((state: RootState) => state.lp.walletAddress)
   const token = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("File changed")
+    const fileInput = (document.getElementById("fileUpload") as HTMLInputElement)
       setselectedFile(fileInput.files![0].name)
-      console.log(fileInput.files![0].name)
+      setdocumentdetails({
+        name:fileInput.files![0].name,
+        size:fileInput.files![0].size,
+        type:fileInput.files![0].type
+      })
 
   };
 
@@ -24,10 +42,45 @@ export default function Home() {
     }
     const storage = new Web3Storage({ token });
     const fileInput = document.getElementById("fileUpload") as HTMLInputElement;
-    console.log(fileInput.files)
-    // const cid = await storage.put(fileInput.files!);
+    const cid = await storage.put(fileInput.files!);
 
-    // console.log(`https://${cid}.ipfs.dweb.link/`);
+    if(cid){
+      setuploadingLoader(false);
+      setselectedFile(null)
+      fileInput.value = ""
+      const cidlink = `https://${cid}.ipfs.dweb.link/`;
+      saveDocumentDetails(cidlink)
+    }
+
+  }
+  const saveDocumentDetails = async (cidlink:string) => {
+   
+    const docName = documentdetails.name;
+    const docType = documentdetails.type;
+    const docSize = documentdetails.size;
+    const link = cidlink;
+    try{
+      const response = await fetch("http://localhost:8000/doc/saveDocDetails",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          address:walletAddress,
+          docName,
+          docType,
+          docSize,
+          link
+        })
+      })
+      if(response.ok){
+        console.log("document details saved successfully")
+      }
+    }
+    catch(err){
+          console.log(err)
+        }
+
   }
 
 
@@ -49,18 +102,20 @@ export default function Home() {
   ]
 
   const handleFileUpload = () => {
-    fileInput.value = ""
-    fileInput.click()
+    
+    (document.getElementById("fileUpload") as HTMLInputElement).value = ""
+    document.getElementById("fileUpload")!.click()
 
   }
   const discardUpload = () => {
-    fileInput.value = ""
+    (document.getElementById("fileUpload") as HTMLInputElement).value = ""
     setselectedFile(null)
   }
   return (
     <div>
       <div className="homeOuter">
         <div className='homeUpper'>
+          {console.log(walletAddress)!}
 
           {uploadingLoader ?
             <div className='uploadingLoaderDiv'>

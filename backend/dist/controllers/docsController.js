@@ -8,35 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleUploadDocument = void 0;
-const ipfs_http_client_1 = require("ipfs-http-client");
-const process_1 = __importDefault(require("process"));
-const web3_storage_1 = require("web3.storage");
-const ipfs = (0, ipfs_http_client_1.create)();
-const handleUploadDocument = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const file = req.file;
-    const token = process_1.default.env.WEB3_STORAGE_API_TOKEN;
+exports.saveDocDetails = void 0;
+const documentSchema_1 = require("../models/documentSchema");
+const saveDocDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (!token) {
-            return console.error('A token is needed. You can create one on https://web3.storage');
+        const { address, docName, docType, docSize, link } = req.body;
+        const doc = new documentSchema_1.document({
+            address, docName, docType, docSize, link
+        });
+        try {
+            const res = yield doc.save();
+            res.send(doc);
         }
-        const storage = new web3_storage_1.Web3Storage({ token });
-        if (!file) {
-            return;
+        catch (err) {
+            res.send(err);
         }
-        console.log(file);
-        // const files = []
-        // files.push(file)
-        // const cid = await storage.put(files)
     }
-    catch (err) {
-        // Handle the error
-        console.log(err);
-        res.status(500).json({ error: 'An error occurred while uploading the file to IPFS.' });
+    catch (error) {
+        res.send(error);
     }
 });
-exports.handleUploadDocument = handleUploadDocument;
+exports.saveDocDetails = saveDocDetails;

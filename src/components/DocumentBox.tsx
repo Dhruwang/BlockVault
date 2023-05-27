@@ -1,4 +1,5 @@
 import React from 'react'
+import ConfirmModal from './ConfirmModal';
 
 export default function DocumentBox({
     docId ,
@@ -19,6 +20,11 @@ export default function DocumentBox({
     const openDocument=()=>{
             window.open(link,"_blank");
     }
+
+    const deleteDocument=()=>[
+
+    ]
+
     return (
 
         <div onClick={openDocument}>
@@ -36,11 +42,11 @@ export default function DocumentBox({
                         Created on 2020-03-20
                     </div>
                     <div className='docSize'>
-                        {docSize+ "B"}
+                        {docSize+ " B"}
                     </div>
                     <div className='docOptionIcon'>
-                        <button>
-                        <i className="bi bi-three-dots"></i>
+                        <button onClick={deleteDocument}>
+                        <i className="bi bi-trash"></i>
 
                         </button>
                     </div>

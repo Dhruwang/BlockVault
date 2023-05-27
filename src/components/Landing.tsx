@@ -109,6 +109,7 @@ export default function Landing() {
     if (web3) {
       const accounts = await web3.eth.getAccounts();
       dispatch(lpActions.connectWallet(accounts[0]));
+      sessionStorage.setItem("walletAddress",accounts[0])
     }
   };
 
@@ -124,9 +125,7 @@ export default function Landing() {
   window.ethereum.on('accountsChanged', function () {
     getWalletAddress();
   })
-
-
-
+  
   return (
     <div>
       <div className='lpOuter'>

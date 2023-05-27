@@ -4,11 +4,16 @@ import { Web3Storage } from 'web3.storage';
 import Spinner from './Spinner';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import NoDocument from './NoDocument';
+import ConfirmModal from './ConfirmModal';
 
 export default function Home() {
 
   const [selectedFile, setselectedFile] = useState<String | null>(null)
   const [uploadingLoader, setuploadingLoader] = useState(false)
+  const [walletAddress, setWalletAddress] = useState<string|null>(useSelector((state: RootState) => state.lp.walletAddress))
+  const [searchOpen, setsearchOpen] = useState(false)
+
 
   interface document{
     _id: string;
@@ -19,7 +24,8 @@ export default function Home() {
     link:string
   }
 
-  const [doumentArray, setdoumentArray] = useState<document[]>([])
+  const [documentArray, setdocumentArray] = useState<document[]>([])
+  const [filteredArray, setfilteredArray] = useState<document[]>([])
 
   interface DocumentDetails {
     name: string;
@@ -32,7 +38,7 @@ export default function Home() {
     size:0,
     type:""
   })
-  const walletAddress = useSelector((state: RootState) => state.lp.walletAddress)
+
   const token = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +83,7 @@ export default function Home() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          address:walletAddress,
+          token:sessionStorage.getItem("token"),
           docName,
           docType,
           docSize,
@@ -96,34 +102,16 @@ export default function Home() {
   }
   const fetchAllDocuments = async()=>{
     try {
-      const response = await fetch(`http://localhost:8000/doc/getAllDocuments?address=${walletAddress}`)
+      const response = await fetch(`http://localhost:8000/doc/getAllDocuments?token=${sessionStorage.getItem('token')}`)
       if(response.ok){
         const data = await response.json()
         console.log(data)
-        setdoumentArray(data)
+        setdocumentArray(data)
       }
     } catch (error) {
       
     }
   }
-
-
-  const docExampleArray = [
-    {
-      "docId": "dfafaf",
-      "docType": "pdf",
-      "docName": "Resume",
-      "docTimestamp": "dsfsfsdf",
-      "docSize": "1 mb"
-    }, {
-      "docId": "dfafaf",
-      "docType": "pdf",
-      "docName": "Marksheet",
-      "docTimestamp": "dsfsfsdf",
-      "docSize": "1.5 mb"
-
-    }
-  ]
 
   const handleFileUpload = () => {
     
@@ -136,6 +124,30 @@ export default function Home() {
     setselectedFile(null)
   }
 
+  const handleSearch=()=>{
+    if(searchOpen){
+      if(document.getElementById("homeSearchBar")){
+        document.getElementById("homeSearchBar")!.style.display = "none"
+        setsearchOpen(false)
+
+
+    }
+  }else{
+
+      if(document.getElementById("homeSearchBar")){
+        document.getElementById("homeSearchBar")!.style.display = "block"
+        document.getElementById("homeSearchBarInput")!.focus();
+        setsearchOpen(true)
+      }
+    }
+  }
+
+  const search=()=>{
+    const tempArray = documentArray.filter((doc)=>{
+      return doc.docName.toLowerCase().startsWith((document.getElementById("homeSearchBarInput") as HTMLInputElement).value.toLowerCase())
+    })
+    setfilteredArray(tempArray)
+  }
   useEffect(() => {
     fetchAllDocuments()
   }, [])
@@ -158,12 +170,20 @@ export default function Home() {
             </div>}
         </div>
         <div className='homeLower'>
-          <div className='homeLowerHead'>
+          <div className='homeLowerHead px-2'>
             <h2>My Documents</h2>
-            <div><i className="bi bi-search fs-2"></i></div>
+            <div><button className='searchButton' onClick={handleSearch}><i className={`bi bi-${searchOpen?"x":"search"} fs-1`}></i></button></div>
           </div>
+          <div className='homeSearchBar' id='homeSearchBar'>
+            <input type='text' id='homeSearchBarInput' onChange={search}></input>
+          </div>
+          
           <div className='homeLowerBody'>
-            {doumentArray && doumentArray.map((element) => {
+            {console.log(documentArray.length)!}
+            {documentArray.length === 0 && <NoDocument />}
+            {(document.getElementById("homeSearchBarInput")as HTMLInputElement).value.length === 0 ? documentArray && documentArray.map((element) => {
+              return <DocumentBox docId={element._id} docName={element.docName} docSize={element.docSize} docTimestamp={element.docTimestamp} docType={element.docType} link={element.link}></DocumentBox>
+            }):filteredArray && filteredArray.map((element) => {
               return <DocumentBox docId={element._id} docName={element.docName} docSize={element.docSize} docTimestamp={element.docTimestamp} docType={element.docType} link={element.link}></DocumentBox>
             })}
           </div>

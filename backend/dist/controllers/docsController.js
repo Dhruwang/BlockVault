@@ -8,12 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchAllDocuemnts = exports.saveDocDetails = void 0;
 const documentSchema_1 = require("../models/documentSchema");
+const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
+var jwt = require('jsonwebtoken');
+dotenv_1.default.config({ path: path_1.default.join(__dirname, '../../.env') });
+const privateKey = process.env.PRIVATE_KEY;
 const saveDocDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { address, docName, docType, docSize, link } = req.body;
+        const { token, docName, docType, docSize, link } = req.body;
+        const address = jwt.verify(token, privateKey).address;
         const doc = new documentSchema_1.document({
             address, docName, docType, docSize, link
         });
@@ -32,9 +41,10 @@ const saveDocDetails = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.saveDocDetails = saveDocDetails;
 const fetchAllDocuemnts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const address = req.query.address;
-        const doc = yield documentSchema_1.document.find({ address });
-        res.send(doc).status(200);
+        const token = req.query.token;
+        const address = jwt.verify(token, privateKey).address;
+        const docs = yield documentSchema_1.document.find({ address });
+        res.send(docs).status(200);
     }
     catch (error) {
         res.send("Internal Server Error").status(500);

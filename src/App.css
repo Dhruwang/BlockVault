@@ -381,7 +381,7 @@ body{
 }
 
 .homeLower{
-  padding: 2rem;
+  padding-top: 2rem;
   width: 100%;
 }
 .homeLowerHead{
@@ -417,6 +417,31 @@ body{
 .uploadingLoaderDiv p{
   font-size: 1.5rem;
   
+}
+.uploadingLoaderDiv > *{
+  color: #DF9CFF;
+}
+.searchButton{
+  background-color: transparent;
+  color: #C4C4C4;
+  border: none;
+}
+.homeSearchBar{
+  width: 100%;
+  height: 5rem;
+  margin-top: 2rem;
+  display: none;
+  
+}
+.homeSearchBar input{
+  width: 100%;
+  height: 100%;
+  background-color: #1D1C1C;
+  border: none;
+  border-radius: 1rem;
+  padding: 0 2rem;
+  color: #C4C4C4;
+  font-size: 1.5rem;
 }
 /* home page css ends  */
 
@@ -463,13 +488,14 @@ body{
 
 /* confirm modal css starts  */
 .confirmModalOuter{
-  height: 100vh;
-  width: 100vw;
+  height: 100vh !important;
+  width: 100vw !important;
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
+  z-index: 1000;
 }
 .confirmModalInner{
   background-color: #1D1C1C;
@@ -492,3 +518,20 @@ body{
   margin: 0 1rem;
 }
 /* confirm modal css ends */
+
+/* NoDocument css starts  */
+.noDocumentsOuter{
+  background-color: #1D1C1C;
+  width: 100%;
+  padding: 3rem;
+  border-radius: 2rem;
+}
+.noDocumentsInner{
+  color: #DF9CFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+/* NoDocument css ends */

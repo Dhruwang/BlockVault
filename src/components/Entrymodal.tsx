@@ -26,6 +26,18 @@ export default function Entrymodal() {
 
     const handleOnSubmit=async(e:SyntheticEvent)=>{
         e.preventDefault();
+        if(credentials.username === "" || credentials.pin ===  ""){
+            return
+        }
+        if(credentials.username.length > 20){
+            document.getElementById("usernameWarning")!.style.display = "block"
+            return
+        }
+        if(credentials.pin.toString().length !== 4){
+            document.getElementById("pinWarning")!.style.display = "block"
+            return
+        }
+        
         try {
             const res = await fetch(`http://localhost:8000/auth/createUser`,{
                 method:"POST",
@@ -39,12 +51,17 @@ export default function Entrymodal() {
                 })
               })
               if(res.ok){
-                navigate("/dashboard")
+                document.getElementById("EmOuter")!.style.display = "none"
+                const resJSON = await res.json()
+                sessionStorage.setItem("token",resJSON.token)
+                sessionStorage.setItem("username",resJSON.username)
+                navigate("/home")
               }
         } catch (error) {
             console.log(error)
         }
     }
+
 
     return (
         <div className='EmOuter' id='EmOuter'>
@@ -55,10 +72,12 @@ export default function Entrymodal() {
                         <div className='inputDiv'>
                             <label>Enter Username</label>
                             <input type='text' id='username' name="username" value={credentials.username} onChange={handleOnChange} placeholder='Username' />
+                            <p className='warnings' id='usernameWarning'>Username should be less than 20 Characters</p>
                         </div>
                         <div className='inputDiv'>
-                            <label>Enter pin</label>
+                            <label>Enter a 4-Digit pin</label>
                             <input type='number' id='pin' name='pin' value={credentials.pin} onChange={handleOnChange} placeholder='pin' />
+                            <p className='warnings' id='pinWarning'>Enter a four digit pin</p>
                         </div>
                     
                 </div>

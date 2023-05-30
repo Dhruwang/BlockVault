@@ -7,16 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { lpActions } from './store/landingPage';
 
-function App() {
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if(sessionStorage.getItem("walletAddress")){
-      dispatch(lpActions.connectWallet(sessionStorage.getItem("walletAddress")));
-    }
-  }, [])
-  
+function App() { 
 
   return (
     <BrowserRouter>

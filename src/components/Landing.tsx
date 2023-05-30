@@ -61,14 +61,15 @@ export default function Landing() {
           setShowSpinner(false)
         }
       }
-      if (!isProfileCompleted) {
+      if (isProfileCompleted===false) {
         showEntryModal()
         setShowSpinner(false)
+        return
       }
-      else {
+      if(isProfileCompleted===true) {
         console.log("running")
         handleLogin()
-        
+
       }
     } catch (error) {
       console.log(error)
@@ -77,7 +78,7 @@ export default function Landing() {
 
   }
 
-  const handleLogin = async()=>{
+  const handleLogin = async () => {
     const res = await fetch(`http://localhost:8000/auth/loginUser`, {
       method: "POST",
       headers: {
@@ -109,7 +110,6 @@ export default function Landing() {
     if (web3) {
       const accounts = await web3.eth.getAccounts();
       dispatch(lpActions.connectWallet(accounts[0]));
-      sessionStorage.setItem("walletAddress",accounts[0])
     }
   };
 
@@ -118,14 +118,16 @@ export default function Landing() {
   }, [])
 
   useEffect(() => {
-      getWalletAddress();
-    
+    getWalletAddress();
+
   }, [web3])
 
   window.ethereum.on('accountsChanged', function () {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("username");
     getWalletAddress();
   })
-  
+
   return (
     <div>
       <div className='lpOuter'>

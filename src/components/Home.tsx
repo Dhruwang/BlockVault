@@ -13,6 +13,7 @@ export default function Home() {
   const [uploadingLoader, setuploadingLoader] = useState(false)
   const [walletAddress, setWalletAddress] = useState<string|null>(useSelector((state: RootState) => state.lp.walletAddress))
   const [searchOpen, setsearchOpen] = useState(false)
+  const searchInput=document.getElementById("homeSearchBarInput")as HTMLInputElement;
 
 
   interface document{
@@ -181,7 +182,7 @@ export default function Home() {
           <div className='homeLowerBody'>
             {console.log(documentArray.length)!}
             {documentArray.length === 0 && <NoDocument />}
-            {(document.getElementById("homeSearchBarInput")as HTMLInputElement).value.length === 0 ? documentArray && documentArray.map((element) => {
+            {searchInput && searchInput.value.length === 0 ? documentArray && documentArray.map((element) => {
               return <DocumentBox docId={element._id} docName={element.docName} docSize={element.docSize} docTimestamp={element.docTimestamp} docType={element.docType} link={element.link}></DocumentBox>
             }):filteredArray && filteredArray.map((element) => {
               return <DocumentBox docId={element._id} docName={element.docName} docSize={element.docSize} docTimestamp={element.docTimestamp} docType={element.docType} link={element.link}></DocumentBox>

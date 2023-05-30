@@ -146,6 +146,7 @@ body{
   justify-content: center;
   position: fixed;
   backdrop-filter: blur(5px);
+  z-index: 1000;
 }
 .EntryModal{
   width: 60rem;
@@ -212,6 +213,9 @@ body{
   border-radius: 1rem;
   cursor: pointer;
   font-size: 1.5rem;
+}
+#usernameWarning, #pinWarning {
+  display: none;
 }
 /* Entrymodal css ends */
 
@@ -535,3 +539,9 @@ body{
   font-size: 3rem;
 }
 /* NoDocument css ends */
+
+/* Generals  */
+.warnings{
+  color: red;
+  font-size: 1.5rem;
+}

@@ -9,19 +9,19 @@ var jwt = require('jsonwebtoken');
 const privateKey = process.env.PRIVATE_KEY;
 
 // function to generate auth token using user's wallet address 
-const loginUser = async(req: Request, res: Response) => {
+const loginUser = async (req: Request, res: Response) => {
     try {
 
         const user = await User.findOne(req.body)
 
-        if(!user){
+        if (!user) {
             return res.status(404).json({
                 message: "User not found"
-        })
+            })
         }
 
         var token = jwt.sign(req.body, privateKey);
-        res.json({"token":token,"username":user.username}).status(200);
+        res.json({ "token": token, "username": user.username }).status(200);
     } catch (error) {
         res.send("Internal server error").status(500)
     }
@@ -51,10 +51,13 @@ const createUser = async (req: Request, res: Response) => {
             }
         }
         else {
-            const user = await User.findOneAndUpdate({address},{ address, username, pin, isProfileCompleted: true })
+            const user = await User.findOneAndUpdate({ address }, { address, username, pin, isProfileCompleted: true })
+            console.log("running")
             try {
                 await user.save();
-                res.status(201);
+                var token = jwt.sign({address}, privateKey);
+                res.json({ "token": token, "username": username }).status(201);
+
             } catch (error) {
                 res.status(500).send(error);
             }
@@ -76,7 +79,7 @@ const checkIsProfileCompleted = async (req: Request, res: Response) => {
         }
         const user = await User.findOne({ address });
         if (!user) {
-            res.json({"error":"User not found"}).status(404);
+            res.json({ "error": "User not found" }).status(404);
             return
         }
         res.send(user.isProfileCompleted).status(200);
@@ -91,7 +94,7 @@ const fetchUsername = (req: Request, res: Response) => {
     try {
         const user = req
     } catch (error) {
-        
+
     }
 }
 

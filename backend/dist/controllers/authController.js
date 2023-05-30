@@ -59,9 +59,12 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
         else {
             const user = yield userSchema_1.User.findOneAndUpdate({ address }, { address, username, pin, isProfileCompleted: true });
+            console.log("running");
             try {
                 yield user.save();
-                res.status(201);
+                var token = jwt.sign({ address }, privateKey);
+                res.json({ "token": token, "username": username }).status(201);
+                return;
             }
             catch (error) {
                 res.status(500).send(error);

@@ -521,6 +521,14 @@ body{
 .confirmModalButtons button{
   margin: 0 1rem;
 }
+.modalLoadingdiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #DF9CFF;
+  font-size: 1.5rem;
+}
 /* confirm modal css ends */
 
 /* NoDocument css starts  */

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchAllDocuemnts = exports.saveDocDetails = void 0;
+exports.deleteDocument = exports.fetchAllDocuemnts = exports.saveDocDetails = void 0;
 const documentSchema_1 = require("../models/documentSchema");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
@@ -51,3 +51,14 @@ const fetchAllDocuemnts = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.fetchAllDocuemnts = fetchAllDocuemnts;
+const deleteDocument = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const documentID = req.params.id;
+        yield documentSchema_1.document.deleteOne({ _id: documentID }); // Assuming "Document" is the mongoose model representing your document
+        res.status(200).send("Document deleted");
+    }
+    catch (err) {
+        res.status(500).send(err === null || err === void 0 ? void 0 : err.message);
+    }
+});
+exports.deleteDocument = deleteDocument;

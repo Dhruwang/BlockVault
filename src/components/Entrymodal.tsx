@@ -2,6 +2,7 @@ import React,{SyntheticEvent,useState} from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
 import { Navigate, useNavigate } from 'react-router-dom'
+import Spinner from './Spinner'
 
 export default function Entrymodal() {
 
@@ -15,6 +16,7 @@ export default function Entrymodal() {
         e.preventDefault()
         document.getElementById("EmOuter")!.style.display = "none"
     }
+    const [loading, setloading] = useState(false)
 
     const handleOnChange=(e:SyntheticEvent)=>{
         const target = e.target as HTMLInputElement;
@@ -65,6 +67,7 @@ export default function Entrymodal() {
 
     return (
         <div className='EmOuter' id='EmOuter'>
+            
             <div className='EntryModal'>
                 <div className='EntryModalUpper'></div>
                 <div className='EntryModalMiddle'>

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import NoDocument from './NoDocument';
 import ConfirmModal from './ConfirmModal';
+import Entrymodal from './Entrymodal';
 
 export default function Home() {
 

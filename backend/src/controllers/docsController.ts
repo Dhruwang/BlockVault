@@ -38,4 +38,16 @@ const fetchAllDocuemnts = async (req:Request, res:Response) => {
     }
 }
 
-export {saveDocDetails,fetchAllDocuemnts}
+const deleteDocument = async (req:Request, res:Response) => {
+    try {
+      const documentID = req.params.id;
+      await document.deleteOne({ _id: documentID }); // Assuming "Document" is the mongoose model representing your document
+  
+      res.status(200).send("Document deleted");
+    } catch (err:any) {
+      res.status(500).send(err?.message);
+    }
+  };
+  
+
+export {saveDocDetails,fetchAllDocuemnts,deleteDocument}

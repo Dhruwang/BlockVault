@@ -64,7 +64,6 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 yield user.save();
                 var token = jwt.sign({ address }, privateKey);
                 res.json({ "token": token, "username": username }).status(201);
-                return;
             }
             catch (error) {
                 res.status(500).send(error);

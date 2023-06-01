@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import ConfirmModal from './ConfirmModal'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { lpActions } from '../store/landingPage'
 
@@ -43,12 +43,12 @@ export default function Navigation() {
                         <div className='NavLinks'>
                             <ul>
                                 <li className='selectedTab'>
-                                    <a>
+                                    <Link to="/home">
                                         <i className="bi bi-house"></i> &nbsp; Home
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li><a><i className="bi bi-file-break"></i> &nbsp;Verify</a></li>
-                                <li><a><i className="bi bi-send"></i>&nbsp;  Send</a></li>
+                                <li><Link to="/send"><i className="bi bi-send"></i>&nbsp;  Send</Link></li>
                             </ul>
                         </div>
                     </div>

@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { lpActions } from './store/landingPage';
 import ConfirmModal from './components/ConfirmModal';
+import Navigation from './components/Navigation';
+import Home from './components/Home';
 
 function App() { 
 
@@ -22,10 +24,14 @@ function App() {
     <BrowserRouter>
       <Entrymodal />
       {showConfirmModal && <ConfirmModal message={message} loadingMessage={loadingMessage} onConfirm={onConfirm} onCancel={onCancel}/>}
-      <Routes>
+      <div className='d-flex'>
+        <Navigation />
+        <Routes>
         <Route path='/' element={<Landing />} />
-        <Route path='/home' element={<AppMain />} />
+        <Route path='/home' element={<Home />} />
       </Routes>
+      </div>
+     
     </BrowserRouter>
   );
 }

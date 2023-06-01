@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import Navigation from './Navigation'
 import Home from './Home'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Send from './Send';
 
 export default function AppMain() {
 
@@ -13,9 +15,10 @@ export default function AppMain() {
 
   return (
     <div className='appMainOuter'>
-      <Navigation/>
-      <Home />
       
+      <Navigation/>
+      {window.location.href.endsWith("home") && <Home/>}
+      {window.location.href.endsWith("send") && <Send/>}    
     </div>
   )
 }

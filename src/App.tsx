@@ -11,6 +11,7 @@ import { lpActions } from './store/landingPage';
 import ConfirmModal from './components/ConfirmModal';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
+import Send from './components/Send';
 
 function App() { 
 
@@ -29,6 +30,7 @@ function App() {
         <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/send' element={<Send />} />
       </Routes>
       </div>
      

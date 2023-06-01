@@ -449,7 +449,7 @@ body{
   display: none;
   
 }
-.homeSearchBar input{
+.SearchInput{
   width: 100%;
   height: 100%;
   background-color: #1D1C1C;
@@ -560,8 +560,55 @@ body{
 }
 /* NoDocument css ends */
 
+/* send page css starts  */
+.sendOuter{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.sendInner{
+  padding: 2rem;
+}
+.sendInnerTop p{
+  color: #DF9CFF;
+  font-size: 1.5rem;
+}
+.sendInnerTop input{
+  margin: 1rem 0;
+  height: 5rem;
+}
+.sendInnerLower{
+  margin: 2rem 0;
+}
+/* send page css ends */
+
+/* sendModal css starts  */
+.sendModalOuter{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position:absolute;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid yellow;
+}
+.sendModalInner{
+  width: 70vw;
+  border: 4px solid red;
+}
+/* sendModal css ends */
+
 /* Generals  */
+h1{
+  color: #DF9CFF;
+  font-size: 3rem;
+}
+h2{
+  color: #DF9CFF;
+}
 .warnings{
   color: red;
   font-size: 1.5rem;
 }
+

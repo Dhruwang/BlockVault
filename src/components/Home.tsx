@@ -177,7 +177,7 @@ export default function Home() {
             <div><button className='searchButton' onClick={handleSearch}><i className={`bi bi-${searchOpen?"x":"search"} fs-1`}></i></button></div>
           </div>
           <div className='homeSearchBar' id='homeSearchBar'>
-            <input type='text' id='homeSearchBarInput' onChange={search}></input>
+            <input type='text' id='homeSearchBarInput' className='SearchInput' onChange={search}></input>
           </div>
           
           <div className='homeLowerBody'>

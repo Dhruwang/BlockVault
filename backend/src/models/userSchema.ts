@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
     isProfileCompleted:{
         type:Boolean,
         default:false
+    },
+    transfers:{
+        type:[String]
     }
 });
 

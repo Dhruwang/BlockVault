@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Send from './components/Send';
 import Landing from './components/Landing';
+import DismissableAlert from './components/Alert';
 
 function App() {
   const showConfirmModal = useSelector((state: RootState) => state.modal.showConfirmModal);
@@ -23,6 +24,7 @@ function App() {
   return (
     <>
       <Entrymodal />
+      <DismissableAlert message="This is an alert!" timeout={2000}/>
       {showConfirmModal && (
         <ConfirmModal
           message={message}

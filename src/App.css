@@ -319,7 +319,7 @@ body{
   text-decoration: none;
   color: #C4C4C4;
 }
-.NavLinks ul li:hover{
+.NavLinks ul li:hover {
   background-color: #DF9CFF;
   border-left: 8px solid #7C5D8D;
   color: #4C3C57 !important;
@@ -354,7 +354,7 @@ body{
   border-left: 8px solid #7C5D8D;
   color: #4C3C57 !important;
 }
-.selectedTab a{
+.selectedTab a,.selectedTab i{
   color: #4C3C57 !important;
 } 
 
@@ -634,6 +634,60 @@ body{
   border-radius: 1rem;
 }
 /* SendModalDocs css ends */
+
+/* alert css starts  */
+.dismissable-alert {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1D1C1C;
+  padding: 10px;
+  border: 1px solid #DF9CFF;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem 2rem;
+}
+.dismissable-alert-inner{
+  display: flex;
+  align-items: center;
+}
+.dismissable-alert-message {
+  flex-grow: 1;
+  margin-right: 10px;
+  color: #DF9CFF;
+  font-size: 1.5rem;
+}
+
+.dismissable-alert-progress {
+  height: 5px;
+  background-color: #DF9CFF;
+  position: absolute;
+  bottom: 0;
+}
+
+.dismissable-alert-progress:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dismissable-alert-dismiss-button {
+  background-color:transparent;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #DF9CFF;
+}
+
+/* alert css ends */
 
 
 /* Generals  */

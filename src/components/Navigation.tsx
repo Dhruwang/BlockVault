@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import ConfirmModal from './ConfirmModal'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate,useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { lpActions } from '../store/landingPage'
 
@@ -11,6 +11,9 @@ export default function Navigation() {
     const [showModal, setshowModal] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const location = useLocation();
+  
     useEffect(() => {
         setusername(sessionStorage.getItem('username'))
     }, [])
@@ -28,6 +31,7 @@ export default function Navigation() {
         sessionStorage.removeItem("token")
         navigate("/")
     }
+    
             
 
     return (
@@ -42,13 +46,13 @@ export default function Navigation() {
                     <div className='NavigationMiddle'>
                         <div className='NavLinks'>
                             <ul>
-                                <li className='selectedTab'>
+                                <li className={location.pathname==="/home"?`selectedTab`:""}>
                                     <Link to="/home">
                                         <i className="bi bi-house"></i> &nbsp; Home
                                     </Link>
                                 </li>
-                                <li><a><i className="bi bi-file-break"></i> &nbsp;Verify</a></li>
-                                <li><Link to="/send"><i className="bi bi-send"></i>&nbsp;  Send</Link></li>
+                                <li className={location.pathname==="/verify"?`selectedTab`:""} ><Link to="/verify"><i className="bi bi-file-break"></i> &nbsp;Verify</Link></li>
+                                <li className={location.pathname==="/send"?`selectedTab`:""}><Link to="/send"><i className="bi bi-send"></i>&nbsp;  Send</Link></li>
                             </ul>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkIsProfileCompleted = exports.createUser = exports.loginUser = void 0;
+exports.checkUserAddress = exports.checkIsProfileCompleted = exports.createUser = exports.loginUser = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const userSchema_1 = require("../models/userSchema");
@@ -94,6 +94,22 @@ const checkIsProfileCompleted = (req, res) => __awaiter(void 0, void 0, void 0, 
     }
 });
 exports.checkIsProfileCompleted = checkIsProfileCompleted;
+const checkUserAddress = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const address = req.query.address;
+        const user = yield userSchema_1.User.findOne({ address });
+        if (!user) {
+            res.status(404).json({ "error": "User not found" });
+            return;
+        }
+        res.status(200).json({ "success": "user address exist" });
+        return;
+    }
+    catch (err) {
+        res.send(err);
+    }
+});
+exports.checkUserAddress = checkUserAddress;
 const fetchUsername = (req, res) => {
     const address = req.query.address;
     try {

@@ -10,4 +10,5 @@ const authRouter = express_1.default.Router();
 exports.authRouter = authRouter;
 authRouter.post("/loginUser", authController_1.loginUser);
 authRouter.get("/checkIsProfileCompleted", authController_1.checkIsProfileCompleted);
+authRouter.get("/checkUser", authController_1.checkUserAddress);
 authRouter.post("/createUser", authController_1.createUser);

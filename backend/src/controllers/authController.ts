@@ -89,6 +89,23 @@ const checkIsProfileCompleted = async (req: Request, res: Response) => {
     }
 }
 
+const checkUserAddress = async(req: Request, res: Response) => {
+    try{
+        const address = req.query.address;
+        const user = await User.findOne({address})
+        if(!user){
+            res.status(404).json({"error": "User not found"})
+            return
+        }
+        res.status(200).json({"success":"user address exist"})
+        return
+    }catch(err){
+        res.send(err)
+    }
+    
+
+}
+
 const fetchUsername = (req: Request, res: Response) => {
     const address = req.query.address
     try {
@@ -99,4 +116,4 @@ const fetchUsername = (req: Request, res: Response) => {
 }
 
 
-export { loginUser, createUser, checkIsProfileCompleted }
+export { loginUser, createUser, checkIsProfileCompleted,checkUserAddress }

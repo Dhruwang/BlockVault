@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: #C4C4C4
 }
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 body{
@@ -200,10 +201,13 @@ body{
 .modalBtn{
   padding: 1rem 2rem;
   background-color: #DF9CFF;
-  color: black;
   border-radius: 1rem;
   cursor: pointer;
   font-size: 1.5rem;
+  border: none;
+}
+.modalBtn > *{
+  color: #1D1C1C;
 }
 .modalBtn-inverted{
   padding: 1rem 2rem;
@@ -487,6 +491,8 @@ body{
 .docName{
   margin: 0 2rem;
   font-size: 2rem;
+  display: flex;
+  align-items: center;
 }
 .documentBoxRight{
   display: flex;
@@ -574,9 +580,12 @@ body{
   color: #DF9CFF;
   font-size: 1.5rem;
 }
-.sendInnerTop input{
-  margin: 1rem 0;
+.addressInputField{
   height: 5rem;
+}
+.sendInnerTop input{
+  height: 100%;
+  
 }
 .sendInnerLower{
   margin: 2rem 0;
@@ -591,13 +600,41 @@ body{
   position:absolute;
   align-items: center;
   justify-content: center;
-  border: 2px solid yellow;
+  background-color: #1d1c1c60;
 }
 .sendModalInner{
-  width: 70vw;
-  border: 4px solid red;
+  width: 50%;
+  background-color: #1D1C1C;
+  padding: 2rem;
+  border-radius: 2rem;
+  padding: 2rem;
+}
+.sendModalHead{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sendModalHead i{
+  cursor: pointer;
+}
+.docContainer{
+  padding: 1rem 0;
 }
 /* sendModal css ends */
+
+/* SendModalDocs css starts */
+.SendModalDocsOuter{
+  width: 100%;
+  display: flex;
+  padding: 1rem ;
+  cursor: pointer;
+}
+.SendModalDocsOuter:hover{
+  background-color: #5F5F5E;
+  border-radius: 1rem;
+}
+/* SendModalDocs css ends */
+
 
 /* Generals  */
 h1{

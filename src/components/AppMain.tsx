@@ -15,7 +15,6 @@ export default function AppMain() {
 
   return (
     <div className='appMainOuter'>
-      
       <Navigation/>
       {window.location.href.endsWith("home") && <Home/>}
       {window.location.href.endsWith("send") && <Send/>}    

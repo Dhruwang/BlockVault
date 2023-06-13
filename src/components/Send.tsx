@@ -39,7 +39,7 @@ export default function Send() {
 
   return (
     <div className='sendOuter'>
-        <SendModal  toAddress={toAddress} loading={loading} userNotFound={userNotFound}/>
+        <SendModal  toAddress={toAddress} loading={loading} userNotFound={userNotFound} setloading={setloading}/>
         <div className='sendInner'>
             <div className='sendInnerTop'>
                 <h1>Send Documents</h1>

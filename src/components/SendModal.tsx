@@ -5,11 +5,13 @@ import Spinner from './Spinner'
 export default function SendModal({
   toAddress,
   loading,
-  userNotFound
+  userNotFound,
+  setloading
 }: {
   toAddress: string,
   loading: boolean,
-  userNotFound: boolean
+  userNotFound: boolean,
+  setloading:any
 }) {
 
   const [documentArray, setdocumentArray] = useState<any[]>([])
@@ -48,7 +50,7 @@ export default function SendModal({
           </div>
           <div className='docContainer'>
             {!userNotFound && documentArray && documentArray.map((element) => {
-              return <SendModalDocs docName={element.docName} docId={element._id} toAddress={toAddress} />
+              return <SendModalDocs docName={element.docName} docId={element._id} toAddress={toAddress} setloading={setloading} />
             })}
 
           </div>

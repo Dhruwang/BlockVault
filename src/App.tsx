@@ -1,40 +1,45 @@
 import './App.css';
-import AppMain from './components/AppMain';
-import Entrymodal from './components/Entrymodal';
-import Landing from './components/Landing';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { lpActions } from './store/landingPage';
+import Entrymodal from './components/Entrymodal';
 import ConfirmModal from './components/ConfirmModal';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Send from './components/Send';
+import Landing from './components/Landing';
 
-function App() { 
+function App() {
+  const showConfirmModal = useSelector((state: RootState) => state.modal.showConfirmModal);
+  const message = useSelector((state: RootState) => state.modal.message);
+  const loadingMessage = useSelector((state: RootState) => state.modal.loadingMessage);
+  const onConfirm = useSelector((state: RootState) => state.modal.onConfirm);
+  const onCancel = useSelector((state: RootState) => state.modal.onCancel);
 
-  const showConfirmModal = useSelector((state:RootState)=>state.modal.showConfirmModal)
-  const message = useSelector((state:RootState)=>state.modal.message)
-  const loadingMessage = useSelector((state:RootState)=>state.modal.loadingMessage)
-  const onConfirm = useSelector((state:RootState)=>state.modal.onConfirm)
-  const onCancel = useSelector((state:RootState)=>state.modal.onCancel)
+  // Get the current location
+  const location = useLocation();
+  const isLandingPage = location.pathname === '/';
 
   return (
-    <BrowserRouter>
+    <>
       <Entrymodal />
-      {showConfirmModal && <ConfirmModal message={message} loadingMessage={loadingMessage} onConfirm={onConfirm} onCancel={onCancel}/>}
+      {showConfirmModal && (
+        <ConfirmModal
+          message={message}
+          loadingMessage={loadingMessage}
+          onConfirm={onConfirm}
+          onCancel={onCancel}
+        />
+      )}
       <div className='d-flex'>
-        <Navigation />
+        {!isLandingPage && <Navigation />}
         <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/send' element={<Send />} />
-      </Routes>
+          <Route path='/' element={<Landing />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/send' element={<Send />} />
+        </Routes>
       </div>
-     
-    </BrowserRouter>
+      </>
   );
 }
 

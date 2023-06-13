@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
+import jwt from 'jwt-decode' 
 
 export default function SendModalDocs({
     docName,
     docId,
-    toAddress
+    toAddress,
+    setloading
 }:{
     docName: string,
     docId: string,
-    toAddress: string
+    toAddress: string,
+    setloading:any
 }) {
+    interface decodedToken {
+        address: string,
+        iat: number
 
-    const walletAddress = useSelector((state: RootState) => state.lp.walletAddress)
+    }
+
     
     const sendDocument = async()=>{
         if( !sessionStorage.getItem("token")){
             return
         }
-        console.log(toAddress)
-        console.log(docId)
+        const decodedToken = jwt<decodedToken>(sessionStorage.getItem("token")!)
+        const walletAddress = decodedToken.address
+        setloading(true)
         try {
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -34,6 +42,10 @@ export default function SendModalDocs({
                 docId: docId,
               }),
             });
+
+            if(response.ok){
+                setloading(false)
+            }
         } catch (err) {
             console.error(err);
         }

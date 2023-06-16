@@ -1,5 +1,6 @@
-import React, { SyntheticEvent, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import SendModal from './SendModal'
+import SendHistoryDocBox from './SendHistoryDocBox'
 
 export default function Send() {
 
@@ -11,6 +12,7 @@ export default function Send() {
     checkAddress()
     document.getElementById("sendModalOuter")!.style.display = "flex"
   }
+  const [sendHistory, setsendHistory] = useState<any>([])
 
   const checkAddress=async()=>{
     try {
@@ -31,11 +33,37 @@ export default function Send() {
     }
   }
 
+  const fetchTransferRecords = async()=>{
+    console.log("fetching docs")
+    try {
+
+      const headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Authorization', sessionStorage.getItem('token') || '');
+
+      const response = await fetch("http://localhost:8000/doc/getDocTransfers",{
+        method: "GET",
+        headers
+      })
+
+      const resJson = await response.json()
+
+      setsendHistory(resJson)
+    } catch (error) {
+      
+    }
+  }
+
   const handleOnChange=(e:SyntheticEvent)=>{
     const target = e.target as HTMLInputElement;
 
     settoAddress(target.value)
   }
+
+  useEffect(() => {
+    fetchTransferRecords()
+  }, [])
+  
 
   return (
     <div className='sendOuter'>
@@ -53,6 +81,11 @@ export default function Send() {
             <div className='sendInnerLower'>
                 
                 <h2>Send history &nbsp; <i className="bi bi-clock-history"></i></h2>
+                <div className='sendHistoryContainer'>
+                  {sendHistory && sendHistory.length>0 && sendHistory.map(()=>{
+                    return <SendHistoryDocBox />
+                  })}
+                </div>
             </div>
         </div>
     </div>

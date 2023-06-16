@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../store'
+import { useDispatch } from 'react-redux'
 import jwt from 'jwt-decode' 
+import { alertActions } from '../store/alert';
 
 export default function SendModalDocs({
     docName,
@@ -14,12 +13,13 @@ export default function SendModalDocs({
     toAddress: string,
     setloading:any
 }) {
+
+    const dispatch = useDispatch();
     interface decodedToken {
         address: string,
         iat: number
 
     }
-
     
     const sendDocument = async()=>{
         if( !sessionStorage.getItem("token")){
@@ -32,19 +32,23 @@ export default function SendModalDocs({
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('Authorization', sessionStorage.getItem('token') || '');
-        
+            
             const response = await fetch('http://localhost:8000/doc/transferDoc', {
               method: 'POST',
               headers: headers,
               body: JSON.stringify({
-                fromAddress: walletAddress,
-                toAddress: toAddress,
+                  fromAddress: walletAddress,
+                  toAddress: toAddress,
                 docId: docId,
               }),
             });
-
+            
             if(response.ok){
+                
+                dispatch(alertActions.setAlertMessage("Document Transferred Successfully"));
                 setloading(false)
+                document.getElementById("sendModalOuter")!.style.display = "none"
+
             }
         } catch (err) {
             console.error(err);

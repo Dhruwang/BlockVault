@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { useDispatch } from 'react-redux';
+import { alertActions } from '../store/alert';
 
-const DismissableAlert = ({ message, timeout }: { message: string, timeout: number }) => {
+export default function Alert () {
     const [isDismissed, setIsDismissed] = useState(false);
     const [progress, setProgress] = useState(0);
+    const dispatch = useDispatch()
+    const alertMessage =useSelector((state: RootState) => state.alert.alertMessage)
+    
+
+    useEffect(() => {
+      setIsDismissed(false)
+      setProgress(0)
+    }, [alertMessage])
+    
 
     useEffect(() => {
         const interval = setInterval(() => {
             setProgress((prevProgress) => prevProgress + 1);
-        }, timeout / 100);
+        }, 2000 / 100);
 
         return () => {
             clearInterval(interval);
+            
         };
-    }, [timeout]);
+    }, [2000]);
 
     useEffect(() => {
         if (progress >= 100) {
@@ -21,7 +35,9 @@ const DismissableAlert = ({ message, timeout }: { message: string, timeout: numb
     }, [progress]);
 
     const dismissAlert = () => {
-        setIsDismissed(true);
+        setIsDismissed(true); 
+        dispatch(alertActions.setAlertMessage(null))
+        
     };
 
     if (isDismissed) {
@@ -29,16 +45,17 @@ const DismissableAlert = ({ message, timeout }: { message: string, timeout: numb
     }
 
     return (
-        <div className="dismissable-alert">
+        <>
+        {alertMessage && <div className="dismissable-alert">
             <div className='d-flex dismissable-alert-inner'>
-                <div className="dismissable-alert-message">{message}</div>
+                <div className="dismissable-alert-message">{alertMessage} </div>
                 <button className="dismissable-alert-dismiss-button" onClick={dismissAlert}>
                     <i className='bi bi-x fs-2'></i>
                 </button>
             </div>
             <div className="dismissable-alert-progress" style={{ width: `${progress}%` }}></div>
-        </div>
+        </div>}
+        </>
     );
 };
 
-export default DismissableAlert;

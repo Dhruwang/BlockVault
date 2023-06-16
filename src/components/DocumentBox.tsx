@@ -45,14 +45,14 @@ export default function DocumentBox({
 
 
     const deleteDocument = () => {
-        dispatch(modalActions.setOnCancel(() => {
-            dispatch(modalActions.setShowConfirmModal(false))
-        }))
+        // dispatch(modalActions.setOnCancel(() => {
+        //     dispatch(modalActions.setShowConfirmModal(false))
+        // }))
         dispatch(modalActions.setMessage("Are you sure you want to delete this document?"))
         dispatch(modalActions.setShowConfirmModal(true))
-        dispatch(modalActions.setOnConfirm(() => {
-            handleDeleteDocument()
-        }))
+        // dispatch(modalActions.setOnConfirm(() => {
+        //     handleDeleteDocument()
+        // }))
     }
 
     return (

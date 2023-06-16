@@ -5,8 +5,8 @@ import Spinner from './Spinner';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import NoDocument from './NoDocument';
-import ConfirmModal from './ConfirmModal';
-import Entrymodal from './Entrymodal';
+import { useDispatch } from 'react-redux';
+import { alertActions } from '../store/alert';
 
 export default function Home() {
 
@@ -15,6 +15,7 @@ export default function Home() {
   const [walletAddress, setWalletAddress] = useState<string|null>(useSelector((state: RootState) => state.lp.walletAddress))
   const [searchOpen, setsearchOpen] = useState(false)
   const searchInput=document.getElementById("homeSearchBarInput")as HTMLInputElement;
+  const dispatch = useDispatch()
 
 
   interface document{
@@ -94,7 +95,9 @@ export default function Home() {
       })
       if(response.ok){
         console.log("document details saved successfully")
+        dispatch(alertActions.setAlertMessage("Document uploaded successfully"));
         fetchAllDocuments();
+
       }
     }
     catch(err){

@@ -114,11 +114,12 @@ const fetchTransferedDocuments = (req, res) => __awaiter(void 0, void 0, void 0,
         const user = yield userSchema_1.User.findOne({ address: userAddress });
         if (!user) {
             res.status(404).send("user not found");
+            return;
         }
         if (user.transfers) {
             transferRecordsArray = user.transfers;
         }
-        for (const element of transferRecordsArray) {
+        for (const element of transferRecordsArray.slice(0, 9)) {
             try {
                 const transRecord = yield transferSchema_1.transferRecords.findById(element);
                 if (transRecord) {

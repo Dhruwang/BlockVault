@@ -6,8 +6,8 @@ const modalSlice = createSlice({
         showConfirmModal:false,
         message: null,
         loadingMessage:null,
-        onConfirm: ()=>{},
-        onCancel:()=>{}
+        // onConfirm: ()=>{},
+        // onCancel:()=>{}
     },
     reducers:{
         setShowConfirmModal:(state,action)=>{
@@ -19,12 +19,12 @@ const modalSlice = createSlice({
         setLoadingMessage:(state,action)=>{
             state.loadingMessage = action.payload
         },
-        setOnConfirm:(state,action)=>{
-            state.onConfirm = action.payload
-        },
-        setOnCancel:(state,action)=>{
-            state.onCancel = action.payload
-        }
+        // setOnConfirm:(state,action)=>{
+        //     state.onConfirm = action.payload
+        // },
+        // setOnCancel:(state,action)=>{
+        //     state.onCancel = action.payload
+        // }
     }
 })
 

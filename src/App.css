@@ -602,6 +602,9 @@ body{
 .sendInnerLower{
   margin: 2rem 0;
 }
+#cannotSelfSendWarning{
+  display: none;
+}
 /* send page css ends */
 
 /* sendModal css starts  */
@@ -620,6 +623,8 @@ body{
   padding: 2rem;
   border-radius: 2rem;
   padding: 2rem;
+  position: absolute;
+  top: 30vh;
 }
 .sendModalHead{
   display: flex;
@@ -628,6 +633,20 @@ body{
 }
 .sendHistoryContainer{
   width: 100%;
+}
+.noTransferRecords{
+  width: 100%;
+  height: 60vh;
+  background-color: #1D1C1C;
+  border-radius: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.noTransferRecords i{
+  color: #DF9CFF;
 }
 .sendModalHead i{
   cursor: pointer;
@@ -664,6 +683,7 @@ body{
   align-items: center;
   flex-direction: column;
   padding: 1rem 2rem;
+  z-index: 10000;
 }
 .dismissable-alert-inner{
   display: flex;
@@ -749,7 +769,7 @@ h2{
   color: #DF9CFF;
 }
 .warnings{
-  color: red;
+  color: red !important;
   font-size: 1.5rem;
 }
 

@@ -124,6 +124,7 @@ const fetchTransferedDocuments = (req, res) => __awaiter(void 0, void 0, void 0,
                 const transRecord = yield transferSchema_1.transferRecords.findById(element);
                 if (transRecord) {
                     const doc = yield documentSchema_1.document.findById(transRecord.docId);
+                    doc.address = transRecord.toAddress;
                     documentArray.push(doc);
                 }
             }

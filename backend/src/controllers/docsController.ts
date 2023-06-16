@@ -114,6 +114,7 @@ const fetchTransferedDocuments = async(req: Request, res: Response)=>{
             const transRecord = await transferRecords.findById(element);
             if(transRecord){
                 const doc = await document.findById(transRecord.docId)
+                doc.address = transRecord.toAddress
                 documentArray.push(doc);
             }
             } catch (error) {

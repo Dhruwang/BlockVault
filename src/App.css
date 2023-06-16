@@ -718,6 +718,27 @@ body{
 }
 /* sendHistoryDocBox css ends */
 
+/* navabr css starts  */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #DF9CFF;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #A576BB;
+}
+/* navabr css ends */
 
 /* Generals  */
 h1{

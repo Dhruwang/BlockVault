@@ -33,7 +33,7 @@ export default function SendModalDocs({
             headers.append('Content-Type', 'application/json');
             headers.append('Authorization', sessionStorage.getItem('token') || '');
             
-            const response = await fetch('http://localhost:8000/doc/transferDoc', {
+            const response = await fetch('https://blockvault19.onrender.com/doc/transferDoc', {
               method: 'POST',
               headers: headers,
               body: JSON.stringify({

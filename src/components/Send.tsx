@@ -31,7 +31,7 @@ const [fromAddress, setfromAddress] = useState<string>("")
   const checkAddress=async()=>{
     try {
       setloading(true)
-      const response = await fetch(`http://localhost:8000/auth/checkUser?address=${toAddress}`)
+      const response = await fetch(`https://blockvault19.onrender.com/auth/checkUser?address=${toAddress}`)
 
       if(response.status === 200){
         setuserNotFound(false)
@@ -55,7 +55,7 @@ const [fromAddress, setfromAddress] = useState<string>("")
             headers.append('Content-Type', 'application/json');
             headers.append('Authorization', sessionStorage.getItem('token') || '');
 
-      const response = await fetch("http://localhost:8000/doc/getDocTransfers",{
+      const response = await fetch("https://blockvault19.onrender.com/doc/getDocTransfers",{
         method: "GET",
         headers
       })

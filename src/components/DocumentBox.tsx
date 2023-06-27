@@ -28,7 +28,7 @@ export default function DocumentBox({
     const handleDeleteDocument = async () => {
         try {
             dispatch(modalActions.setLoadingMessage(`Deleting ${docName} ...`))
-            const res = await fetch(`http://localhost:8000/doc/deleteDoc/${docId}`, {
+            const res = await fetch(`https://blockvault19.onrender.com/doc/deleteDoc/${docId}`, {
                 method: "DELETE",
             })
                 .then(res => {

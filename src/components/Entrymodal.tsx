@@ -41,7 +41,7 @@ export default function Entrymodal() {
         }
         
         try {
-            const res = await fetch(`http://localhost:8000/auth/createUser`,{
+            const res = await fetch(`https://blockvault19.onrender.com/auth/createUser`,{
                 method:"POST",
                 headers: {
                   "Content-Type": "application/json",

@@ -44,10 +44,10 @@ export default function Landing() {
 
     setShowSpinner(true);
     try {
-      const res = await fetch(`http://localhost:8000/auth/checkIsProfileCompleted?address=${walletAddress}`)
+      const res = await fetch(`https://blockvault19.onrender.com/auth/checkIsProfileCompleted?address=${walletAddress}`)
       const isProfileCompleted = await res.json()
       if (isProfileCompleted.error === "User not found") {
-        const res = await fetch(`http://localhost:8000/auth/createUser`, {
+        const res = await fetch(`https://blockvault19.onrender.com/auth/createUser`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export default function Landing() {
   }
 
   const handleLogin = async () => {
-    const res = await fetch(`http://localhost:8000/auth/loginUser`, {
+    const res = await fetch(`https://blockvault19.onrender.com/auth/loginUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

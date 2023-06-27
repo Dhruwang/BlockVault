@@ -22,7 +22,7 @@ export default function SendModal({
 
   const fetchAllDocuments = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/doc/getAllDocuments?token=${sessionStorage.getItem('token')}`)
+      const response = await fetch(`https://blockvault19.onrender.com/doc/getAllDocuments?token=${sessionStorage.getItem('token')}`)
       if (response.ok) {
         const data = await response.json()
         console.log(data)

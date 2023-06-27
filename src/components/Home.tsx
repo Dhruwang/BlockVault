@@ -80,7 +80,7 @@ export default function Home() {
     const docSize = documentdetails.size;
     const link = cidlink;
     try{
-      const response = await fetch("http://localhost:8000/doc/saveDocDetails",{
+      const response = await fetch("https://blockvault19.onrender.com/doc/saveDocDetails",{
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -107,7 +107,7 @@ export default function Home() {
   }
   const fetchAllDocuments = async()=>{
     try {
-      const response = await fetch(`http://localhost:8000/doc/getAllDocuments?token=${sessionStorage.getItem('token')}`)
+      const response = await fetch(`https://blockvault19.onrender.com/doc/getAllDocuments?token=${sessionStorage.getItem('token')}`)
       if(response.ok){
         const data = await response.json()
         console.log(data)

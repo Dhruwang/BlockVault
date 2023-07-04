@@ -11,6 +11,15 @@ import Landing from './components/Landing';
 import Alert from './components/Alert';
 import { useEffect } from 'react';
 import EmptyComponent from './components/EmptyComponent';
+import formbricks from "@formbricks/js";
+
+if (typeof window !== "undefined") {
+  formbricks.init({
+    environmentId: "clj0zabr40009ma0hs7bb4cq9",
+    apiHost: "https://app.formbricks.com",
+    logLevel: "debug", // remove when in production
+  });
+}
 
 function App() {
   const showConfirmModal = useSelector((state: RootState) => state.modal.showConfirmModal);
@@ -25,16 +34,16 @@ function App() {
 
   return (
     <>
-      <Alert/>
+      <Alert />
       <Entrymodal />
       {showConfirmModal && (
         <ConfirmModal
           message={message}
           loadingMessage={loadingMessage}
-          // onConfirm={onConfirm}
-          // onCancel={onCancel}
+        // onConfirm={onConfirm}
+        // onCancel={onCancel}
         />
-        )}
+      )}
       <div className='d-flex'>
         {!isLandingPage && <Navigation />}
         {!isLandingPage && <EmptyComponent />}
@@ -44,7 +53,8 @@ function App() {
           <Route path='/send' element={<Send />} />
         </Routes>
       </div>
-      </>
+     
+    </>
   );
 }
 

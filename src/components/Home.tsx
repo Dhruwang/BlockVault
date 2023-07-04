@@ -159,7 +159,7 @@ export default function Home() {
   
   return (
     <div>
-      <div className="homeOuter">
+      <div className="homeOuter" id='test'>
         <div className='homeUpper'>
           <div className='homeUpperAnimation'>
           </div>
